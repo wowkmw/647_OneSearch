@@ -14,8 +14,9 @@ namespace OneSearch
 {
     public partial class Form1 : Form
     {
-        string filePath;
+        string jsonFilePath;
         JArray collection;
+        string indexPath;
 
         public Form1()
         {
@@ -31,13 +32,37 @@ namespace OneSearch
         {
             OpenFileDialog openFile = new OpenFileDialog();
             openFile.ShowDialog();
-            filePath = openFile.FileName;
+            jsonFilePath = openFile.FileName;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             JsonImport myJson = new JsonImport();
-            collection = myJson.JsonCollection(filePath);
+            LuceneCore myLucene = new LuceneCore();
+            collection = myJson.JsonCollection(jsonFilePath);
+            myLucene.CreateIndex(indexPath);
+            int numofDoc = 82326;
+            //System.Console.WriteLine("Creating query index using the first {0} results...", numofDoc);
+            int docID = 0;
+            while (docID < numofDoc)
+            {
+                int i = 0;
+                foreach (var j in collection[docID]["passages"])
+                {
+                    myLucene.IndexText(collection[docID]["passages"][i]["url"].ToString() + "\n" + collection[docID]["passages"][i]["passage_text"].ToString());
+                    i++;
+                }
+                docID++;
+            }
+            //Console.WriteLine("All documents added.");
+            myLucene.CleanUpIndexer();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog path = new FolderBrowserDialog();
+            path.ShowDialog();
+            indexPath = path.SelectedPath;
         }
     }
 }
