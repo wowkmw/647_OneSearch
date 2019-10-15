@@ -7,25 +7,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Newtonsoft.Json.Linq; //for jarray
 
 
 namespace OneSearch
 {
     public partial class Form1 : Form
     {
-        string jsonFilePath;
-        JArray collection;
-        string indexPath;
+        internal static Form1 Form1Instance;
+        internal string jsonFilePath;
+        //internal JArray collection;
+        internal string indexPath;
 
         public Form1()
         {
+            Form1Instance = this;
             InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            LuceneCore myLuceneApp = new LuceneCore();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -33,29 +33,17 @@ namespace OneSearch
             OpenFileDialog openFile = new OpenFileDialog();
             openFile.ShowDialog();
             jsonFilePath = openFile.FileName;
+            textBox1.Text = jsonFilePath;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            JsonImport myJson = new JsonImport();
-            LuceneCore myLucene = new LuceneCore();
-            collection = myJson.JsonCollection(jsonFilePath);
-            myLucene.CreateIndex(indexPath);
-            int numofDoc = 82326;
-            //System.Console.WriteLine("Creating query index using the first {0} results...", numofDoc);
-            int docID = 0;
-            while (docID < numofDoc)
-            {
-                int i = 0;
-                foreach (var j in collection[docID]["passages"])
-                {
-                    myLucene.IndexText(collection[docID]["passages"][i]["url"].ToString() + "\n" + collection[docID]["passages"][i]["passage_text"].ToString());
-                    i++;
-                }
-                docID++;
-            }
-            //Console.WriteLine("All documents added.");
-            myLucene.CleanUpIndexer();
+            WindowState = FormWindowState.Minimized;
+            ShowInTaskbar = false;
+            Visible = false;
+            Form2 form2 = new Form2(this);
+            form2.Show();
+            
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -63,6 +51,17 @@ namespace OneSearch
             FolderBrowserDialog path = new FolderBrowserDialog();
             path.ShowDialog();
             indexPath = path.SelectedPath;
+            textBox2.Text = indexPath;
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
