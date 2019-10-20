@@ -23,7 +23,7 @@ namespace OneSearch
             form1 = aa;
             InitializeComponent();
         }
-        
+
         private void Form2_Load(object sender, EventArgs e)
         {
             JsonImport myJson = new JsonImport();

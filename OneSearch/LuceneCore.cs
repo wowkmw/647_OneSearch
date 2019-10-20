@@ -10,6 +10,7 @@ using Lucene.Net.Index; //for Index Writer
 //using Lucene.Net.Store; //for Directory
 using Lucene.Net.Search; // for IndexSearcher
 using Lucene.Net.QueryParsers;  // for QueryParser
+using System.Windows.Forms;
 //using Lucene.Net.Analysis.Snowball; // for snowball analyser 
 //using Newtonsoft.Json;
 //using Newtonsoft.Json.Linq; //for jarray
@@ -93,19 +94,19 @@ namespace OneSearch
         public void SearchText(string querytext, int DocNum)
         {
 
-            System.Console.WriteLine("Searching for " + querytext);
+            //System.Console.WriteLine("Searching for " + querytext);
             querytext = querytext.ToLower();
             Query query = parser.Parse(querytext);
 
             TopDocs results = searcher.Search(query, DocNum);
-            System.Console.WriteLine("Number of results is " + results.TotalHits);
+            MessageBox.Show("Number of results is " + results.TotalHits);
             int rank = 0;
             foreach (ScoreDoc scoreDoc in results.ScoreDocs)
             {
                 rank++;
                 Lucene.Net.Documents.Document doc = searcher.Doc(scoreDoc.Doc);
                 string myFieldValue = doc.Get(TEXT_FN).ToString();
-                Console.WriteLine("Rank: " + rank + " Score: " + scoreDoc.Score + "\nResult: " + myFieldValue);
+                //Console.WriteLine("Rank: " + rank + " Score: " + scoreDoc.Score + "\nResult: " + myFieldValue);
                 Explanation ex = searcher.Explain(query, scoreDoc.Doc);
                 Console.WriteLine(ex);
             }

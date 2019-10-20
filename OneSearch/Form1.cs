@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json.Linq;
+
 
 
 namespace OneSearch
@@ -15,8 +17,10 @@ namespace OneSearch
     {
         internal static Form1 Form1Instance;
         internal string jsonFilePath;
-        //internal JArray collection;
+        internal JArray collection;
+        internal LuceneCore myLucene;
         internal string indexPath;
+        internal string searchTerm;
 
         public Form1()
         {
@@ -33,17 +37,41 @@ namespace OneSearch
             OpenFileDialog openFile = new OpenFileDialog();
             openFile.ShowDialog();
             jsonFilePath = openFile.FileName;
-            textBox1.Text = jsonFilePath;
+            jsonPath.Text = jsonFilePath;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            WindowState = FormWindowState.Minimized;
-            ShowInTaskbar = false;
-            Visible = false;
-            Form2 form2 = new Form2(this);
-            form2.Show();
-            
+            //WindowState = FormWindowState.Minimized;
+            //ShowInTaskbar = false;
+            //Visible = false;
+            //Form2 form2 = new Form2(this);
+            //form2.Show();
+            JsonImport myJson = new JsonImport();
+            collection = myJson.JsonCollection(jsonFilePath);
+            myLucene = new LuceneCore();
+            DateTime a = DateTime.Now;
+            myLucene.CreateIndex(indexPath);
+            //int numofDoc = 82326;
+            int numofDoc = 12326;
+            int docID = 0;
+            while (docID < numofDoc)
+            {
+                int i = 0;
+                foreach (var j in collection[docID]["passages"])
+                {
+                    myLucene.IndexText(collection[docID]["passages"][i]["url"].ToString() + "\n" + collection[docID]["passages"][i]["passage_text"].ToString());
+                    i++;
+                }
+                docID++;
+            }
+            myLucene.CleanUpIndexer();
+            DateTime b = DateTime.Now;
+            TimeSpan c = b - a;
+            double seconds = c.TotalSeconds;
+            MessageBox.Show("The indexing took " + seconds.ToString() + " seconds");
+            myLucene.CreateSearcher();
+            MessageBox.Show("Searcher ready, enter keywords to start searching...");
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -51,7 +79,7 @@ namespace OneSearch
             FolderBrowserDialog path = new FolderBrowserDialog();
             path.ShowDialog();
             indexPath = path.SelectedPath;
-            textBox2.Text = indexPath;
+            showIndexPath.Text = indexPath;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -62,6 +90,28 @@ namespace OneSearch
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void searchButton_Click(object sender, EventArgs e)
+        {
+            searchTerm = textBox3.Text;
+            int docNum = 10;
+            myLucene.SearchText(searchTerm, docNum);
+            //myLucene.CleanUpSearcher();
+        }
+
+        private void ExitApp_Click(object sender, EventArgs e)
+        {
+            if (myLucene != null)
+            {
+                myLucene.CleanUpSearcher();
+            }
+            Application.Exit();
         }
     }
 }
