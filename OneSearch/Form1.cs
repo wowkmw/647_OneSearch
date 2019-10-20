@@ -100,6 +100,8 @@ namespace OneSearch
 
         private void searchButton_Click(object sender, EventArgs e)
         {
+            ResulttView.Items.Clear();
+            ResulttView.Controls.Clear();
             searchTerm = textBox3.Text;
             int docNum = 100;
             int count = 0;
@@ -125,7 +127,11 @@ namespace OneSearch
 
         private void ResulttView_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            if (ResulttView.SelectedItems.Count > 0)
+            {
+                int rank = Int32.Parse(ResulttView.SelectedItems[0].Text);
+                MessageBox.Show(resultList[rank - 1]["result"], "Entire Passage");
+            }
         }
     }
 }

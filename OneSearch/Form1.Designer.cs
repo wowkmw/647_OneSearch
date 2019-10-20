@@ -126,7 +126,7 @@
             this.ResulttView.HideSelection = false;
             this.ResulttView.Location = new System.Drawing.Point(583, 26);
             this.ResulttView.Name = "ResulttView";
-            this.ResulttView.Size = new System.Drawing.Size(785, 542);
+            this.ResulttView.Size = new System.Drawing.Size(793, 542);
             this.ResulttView.TabIndex = 8;
             this.ResulttView.UseCompatibleStateImageBehavior = false;
             this.ResulttView.View = System.Windows.Forms.View.Details;
@@ -151,7 +151,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1380, 580);
+            this.ClientSize = new System.Drawing.Size(1388, 580);
             this.Controls.Add(this.ResulttView);
             this.Controls.Add(this.ExitApp);
             this.Controls.Add(this.searchButton);
