@@ -11,6 +11,7 @@ using Lucene.Net.Index; //for Index Writer
 using Lucene.Net.Search; // for IndexSearcher
 using Lucene.Net.QueryParsers;  // for QueryParser
 using System.Windows.Forms;
+using System.Collections.Generic;
 //using Lucene.Net.Analysis.Snowball; // for snowball analyser 
 //using Newtonsoft.Json;
 //using Newtonsoft.Json.Linq; //for jarray
@@ -91,12 +92,12 @@ namespace OneSearch
         /// Searches the index for the querytext
         /// </summary>
         /// <param name="querytext">The text to search the index</param>
-        public void SearchText(string querytext, int DocNum)
+        public List<Dictionary<string, string>> SearchText(string querytext, int DocNum)
         {
-
             //System.Console.WriteLine("Searching for " + querytext);
             querytext = querytext.ToLower();
             Query query = parser.Parse(querytext);
+            List<Dictionary<string, string>> resultList = new List<Dictionary<string, string>>();
 
             TopDocs results = searcher.Search(query, DocNum);
             MessageBox.Show("Number of results is " + results.TotalHits);
@@ -104,12 +105,19 @@ namespace OneSearch
             foreach (ScoreDoc scoreDoc in results.ScoreDocs)
             {
                 rank++;
+                Dictionary<string, string> dict;
+                dict = new Dictionary<string, string>();
                 Lucene.Net.Documents.Document doc = searcher.Doc(scoreDoc.Doc);
                 string myFieldValue = doc.Get(TEXT_FN).ToString();
-                //Console.WriteLine("Rank: " + rank + " Score: " + scoreDoc.Score + "\nResult: " + myFieldValue);
-                Explanation ex = searcher.Explain(query, scoreDoc.Doc);
-                Console.WriteLine(ex);
+                dict.Add("rank", rank.ToString());
+                dict.Add("score", scoreDoc.Score.ToString());
+                dict.Add("result", myFieldValue.ToString());
+                //resultText += "Rank: " + rank + " Score: " + scoreDoc.Score + "\nResult: " + myFieldValue + "\n\n";
+                resultList.Add(dict);
+                //Explanation ex = searcher.Explain(query, scoreDoc.Doc);
+                //Console.WriteLine(ex);
             }
+            return resultList;
         }
 
         /// <summary>

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.jsonButton = new System.Windows.Forms.Button();
             this.buildIndex = new System.Windows.Forms.Button();
             this.indexButton = new System.Windows.Forms.Button();
@@ -36,6 +37,10 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.searchButton = new System.Windows.Forms.Button();
             this.ExitApp = new System.Windows.Forms.Button();
+            this.ResulttView = new System.Windows.Forms.ListView();
+            this.rank = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.score = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.result = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // jsonButton
@@ -104,19 +109,50 @@
             // 
             // ExitApp
             // 
-            this.ExitApp.Location = new System.Drawing.Point(12, 441);
+            this.ExitApp.Location = new System.Drawing.Point(12, 535);
             this.ExitApp.Name = "ExitApp";
             this.ExitApp.Size = new System.Drawing.Size(111, 33);
             this.ExitApp.TabIndex = 7;
-            this.ExitApp.Text = "EXIT...";
+            this.ExitApp.Text = "EXIT";
             this.ExitApp.UseVisualStyleBackColor = true;
             this.ExitApp.Click += new System.EventHandler(this.ExitApp_Click);
+            // 
+            // ResulttView
+            // 
+            this.ResulttView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.rank,
+            this.score,
+            this.result});
+            this.ResulttView.HideSelection = false;
+            this.ResulttView.Location = new System.Drawing.Point(583, 26);
+            this.ResulttView.Name = "ResulttView";
+            this.ResulttView.Size = new System.Drawing.Size(785, 542);
+            this.ResulttView.TabIndex = 8;
+            this.ResulttView.UseCompatibleStateImageBehavior = false;
+            this.ResulttView.View = System.Windows.Forms.View.Details;
+            this.ResulttView.SelectedIndexChanged += new System.EventHandler(this.ResulttView_SelectedIndexChanged);
+            // 
+            // rank
+            // 
+            this.rank.Text = "rank";
+            this.rank.Width = 50;
+            // 
+            // score
+            // 
+            this.score.Text = "score";
+            this.score.Width = 50;
+            // 
+            // result
+            // 
+            this.result.Text = "result";
+            this.result.Width = 681;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1380, 486);
+            this.ClientSize = new System.Drawing.Size(1380, 580);
+            this.Controls.Add(this.ResulttView);
             this.Controls.Add(this.ExitApp);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.textBox3);
@@ -125,8 +161,9 @@
             this.Controls.Add(this.indexButton);
             this.Controls.Add(this.buildIndex);
             this.Controls.Add(this.jsonButton);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "OneSearch";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -143,6 +180,10 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.Button ExitApp;
+        private System.Windows.Forms.ListView ResulttView;
+        private System.Windows.Forms.ColumnHeader rank;
+        private System.Windows.Forms.ColumnHeader score;
+        private System.Windows.Forms.ColumnHeader result;
     }
 }
 

@@ -21,6 +21,7 @@ namespace OneSearch
         internal LuceneCore myLucene;
         internal string indexPath;
         internal string searchTerm;
+        List<Dictionary<string, string>> resultList;
 
         public Form1()
         {
@@ -100,8 +101,16 @@ namespace OneSearch
         private void searchButton_Click(object sender, EventArgs e)
         {
             searchTerm = textBox3.Text;
-            int docNum = 10;
-            myLucene.SearchText(searchTerm, docNum);
+            int docNum = 100;
+            int count = 0;
+            resultList = myLucene.SearchText(searchTerm, docNum);
+            foreach (var k in resultList)
+            {
+                string[] row = { resultList[count]["rank"], resultList[count]["score"], resultList[count]["result"] };
+                var listViewItem = new ListViewItem(row);
+                ResulttView.Items.Add(listViewItem);
+                count++;
+            }
             //myLucene.CleanUpSearcher();
         }
 
@@ -112,6 +121,11 @@ namespace OneSearch
                 myLucene.CleanUpSearcher();
             }
             Application.Exit();
+        }
+
+        private void ResulttView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
