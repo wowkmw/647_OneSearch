@@ -25,10 +25,12 @@ namespace OneSearch
         Lucene.Net.Index.IndexWriter writer;
         IndexSearcher searcher;
         QueryParser parser;
+
         //Lucene.Net.Search.Similarity newSimilarity;
 
         const Lucene.Net.Util.Version VERSION = Lucene.Net.Util.Version.LUCENE_30;
         const string TEXT_FN = "Text";
+        const string passID = "pID";
 
 
         public LuceneCore()
@@ -59,12 +61,14 @@ namespace OneSearch
         /// Indexes a given string into the index
         /// </summary>
         /// <param name="text">The text to index</param>
-        public void IndexText(string text)
+        public void IndexText(string text, string id)
         {
 
-            Lucene.Net.Documents.Field field = new Field(TEXT_FN, text, Field.Store.YES, Field.Index.ANALYZED_NO_NORMS, Field.TermVector.NO);
-            Lucene.Net.Documents.Document doc = new Document();
+            Field field = new Field(TEXT_FN, text, Field.Store.YES, Field.Index.ANALYZED_NO_NORMS, Field.TermVector.NO);
+            Field idField = new Field(passID, id, Field.Store.YES, Field.Index.ANALYZED_NO_NORMS, Field.TermVector.NO);
+            Document doc = new Document();
             doc.Add(field);
+            doc.Add(idField);
             writer.AddDocument(doc);
         }
 
@@ -100,7 +104,7 @@ namespace OneSearch
             List<Dictionary<string, string>> resultList = new List<Dictionary<string, string>>();
 
             TopDocs results = searcher.Search(query, DocNum);
-            MessageBox.Show("Number of results is " + results.TotalHits);
+            
             int rank = 0;
             foreach (ScoreDoc scoreDoc in results.ScoreDocs)
             {
@@ -109,20 +113,20 @@ namespace OneSearch
                 dict = new Dictionary<string, string>();
                 Lucene.Net.Documents.Document doc = searcher.Doc(scoreDoc.Doc);
                 string myFieldValue = doc.Get(TEXT_FN).ToString();
+                string myPassID = doc.Get(passID).ToString();
                 dict.Add("rank", rank.ToString());
                 dict.Add("score", scoreDoc.Score.ToString());
                 dict.Add("result", myFieldValue.ToString());
+                dict.Add("passID", myPassID.ToString());
                 //resultText += "Rank: " + rank + " Score: " + scoreDoc.Score + "\nResult: " + myFieldValue + "\n\n";
                 resultList.Add(dict);
                 //Explanation ex = searcher.Explain(query, scoreDoc.Doc);
                 //Console.WriteLine(ex);
             }
+            MessageBox.Show("Number of results is " + results.TotalHits + "\nShowing the first " + DocNum + " results...");
             return resultList;
         }
 
-        /// <summary>
-        /// Closes the index after searching
-        /// </summary>
         public void CleanUpSearcher()
         {
             searcher.Dispose();
