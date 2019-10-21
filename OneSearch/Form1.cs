@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
+using Lucene.Net.Search;
 
 
 
@@ -17,13 +18,15 @@ namespace OneSearch
     public partial class Form1 : Form
     {
         internal static Form1 Form1Instance;
-        internal string jsonFilePath = "";
-        internal JArray collection;
-        internal LuceneCore myLucene;
-        internal string indexPath = "";
-        internal string searchTerm = "";
-        List<Dictionary<string, string>> resultList;
-        internal int queryCount = 0;
+        private string jsonFilePath = "";
+        private JArray collection;
+        private LuceneCore myLucene;
+        private string indexPath = "";
+        private string searchTerm = "";
+        private List<Dictionary<string, string>> resultList;
+        private int queryCount = 0;
+        //private int numofDoc = 82326;
+        private int numofDoc = 10000;
 
         public Form1()
         {
@@ -46,11 +49,6 @@ namespace OneSearch
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //WindowState = FormWindowState.Minimized;
-            //ShowInTaskbar = false;
-            //Visible = false;
-            //Form2 form2 = new Form2(this);
-            //form2.Show();
             if (jsonFilePath is "")
             {
                 MessageBox.Show("Please select a valid json source file!");
@@ -63,13 +61,15 @@ namespace OneSearch
                 }
                 else
                 {
+                    DateTime ja = DateTime.Now;
                     JsonImport myJson = new JsonImport();
                     collection = myJson.JsonCollection(jsonFilePath);
+                    DateTime jb = DateTime.Now;
+                    TimeSpan jc = jb - ja;
+                    double jseconds = jc.TotalSeconds;
                     myLucene = new LuceneCore();
                     DateTime a = DateTime.Now;
                     myLucene.CreateIndex(indexPath);
-                    //int numofDoc = 82326;
-                    int numofDoc = 25000;
                     int docID = 0;
                     while (docID < numofDoc)
                     {
@@ -87,7 +87,7 @@ namespace OneSearch
                     DateTime b = DateTime.Now;
                     TimeSpan c = b - a;
                     double seconds = c.TotalSeconds;
-                    MessageBox.Show("The indexing took " + seconds.ToString() + " seconds");
+                    MessageBox.Show("The json file takes " + jseconds.ToString() + "seconds to be imported\n" + "The indexing took " + seconds.ToString() + " seconds");
                     myLucene.CreateSearcher();
                     MessageBox.Show("Searcher ready, enter keywords to start searching...");
                 }
@@ -103,21 +103,6 @@ namespace OneSearch
             showIndexPath.Text = indexPath;
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void searchButton_Click(object sender, EventArgs e)
         {
             ResulttView.Items.Clear();
@@ -127,36 +112,51 @@ namespace OneSearch
             {
                 MessageBox.Show("Please enter some keyword!");
             }
+            else if (myLucene is null)
+            {
+                MessageBox.Show("Search engine not yet initialized!");
+            }
             else
             {
-                int docNum = 100;
-                int count = 0;
                 DateTime a = DateTime.Now;
                 myLucene.CreateSearcher();
-                resultList = myLucene.SearchText(searchTerm, docNum);
+                searchTerm = searchTerm.ToLower();
+                Query query = LuceneCore.parser.Parse(searchTerm);
+                string processedQuery = query.ToString();
+                FinalWordBox.Text = processedQuery;
+                resultList = myLucene.SearchText(query, numofDoc);
                 myLucene.CleanUpSearcher();
                 DateTime b = DateTime.Now;
                 TimeSpan c = b - a;
                 double seconds = c.TotalSeconds;
-                MessageBox.Show("The searching took " + seconds.ToString() + " seconds");
                 queryCount++;
-                foreach (var k in resultList)
+                int numofresult = resultList.Count;
+                TotalResultBox.Text = numofresult.ToString();
+                MessageBox.Show("The searching took " + seconds.ToString() + " seconds");
+                MessageBox.Show("Number of results is " + numofresult + "\nShowing the first 20 results...");
+                if (numofresult < 20)
                 {
-                    string[] row = { resultList[count]["rank"], resultList[count]["score"], resultList[count]["result"] };
-                    var listViewItem = new ListViewItem(row);
-                    ResulttView.Items.Add(listViewItem);
-                    count++;
+                    for (int i = 0; i < numofresult; i++)
+                    {
+                        string[] row = { resultList[i]["rank"], resultList[i]["score"], resultList[i]["result"] };
+                        var listViewItem = new ListViewItem(row);
+                        ResulttView.Items.Add(listViewItem);
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < 20; i++)
+                    {
+                        string[] row = { resultList[i]["rank"], resultList[i]["score"], resultList[i]["result"] };
+                        var listViewItem = new ListViewItem(row);
+                        ResulttView.Items.Add(listViewItem);
+                    }
                 }
             }
-
         }
 
         private void ExitApp_Click(object sender, EventArgs e)
         {
-            if (myLucene != null)
-            {
-                myLucene.CleanUpSearcher();
-            }
             Application.Exit();
         }
 
@@ -176,21 +176,17 @@ namespace OneSearch
             saveMe.Filter = "Text Files | *.txt";
             saveMe.ShowDialog();
             filepath = saveMe.FileName;
-            if (filepath is "")
+            if (resultList != null)
             {
-                MessageBox.Show("Please select the save locatiion");
+                if (filepath != "")
+                {
+                    Program.ResultSaver(queryCount, resultList, filepath);
+                }
             }
             else
             {
-                
-                Program.ResultSaver(queryCount, resultList, filepath);
-
+                MessageBox.Show("Search something first...");
             }
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

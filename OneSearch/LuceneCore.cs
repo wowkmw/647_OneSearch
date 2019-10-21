@@ -18,13 +18,13 @@ using System.Collections.Generic;
 
 namespace OneSearch
 {
-    class LuceneCore
+    public class LuceneCore
     {
         Lucene.Net.Store.Directory luceneIndexDirectory;
         Lucene.Net.Analysis.Analyzer analyzer;
         Lucene.Net.Index.IndexWriter writer;
         IndexSearcher searcher;
-        QueryParser parser;
+        public static QueryParser parser;
 
         //Lucene.Net.Search.Similarity newSimilarity;
 
@@ -96,14 +96,14 @@ namespace OneSearch
         /// Searches the index for the querytext
         /// </summary>
         /// <param name="querytext">The text to search the index</param>
-        public List<Dictionary<string, string>> SearchText(string querytext, int DocNum)
+        public List<Dictionary<string, string>> SearchText(Query querytext, int DocNum)
         {
             //System.Console.WriteLine("Searching for " + querytext);
-            querytext = querytext.ToLower();
-            Query query = parser.Parse(querytext);
+            //querytext = querytext.ToLower();
+            //Query query = parser.Parse(querytext);
             List<Dictionary<string, string>> resultList = new List<Dictionary<string, string>>();
 
-            TopDocs results = searcher.Search(query, DocNum);
+            TopDocs results = searcher.Search(querytext, DocNum);
             
             int rank = 0;
             foreach (ScoreDoc scoreDoc in results.ScoreDocs)
@@ -123,7 +123,6 @@ namespace OneSearch
                 //Explanation ex = searcher.Explain(query, scoreDoc.Doc);
                 //Console.WriteLine(ex);
             }
-            MessageBox.Show("Number of results is " + results.TotalHits + "\nShowing the first " + DocNum + " results...");
             return resultList;
         }
 
