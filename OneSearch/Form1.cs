@@ -88,7 +88,6 @@ namespace OneSearch
                     TimeSpan c = b - a;
                     double seconds = c.TotalSeconds;
                     MessageBox.Show("The json file takes " + jseconds.ToString() + "seconds to be imported\n" + "The indexing took " + seconds.ToString() + " seconds");
-                    myLucene.CreateSearcher();
                     MessageBox.Show("Searcher ready, enter keywords to start searching...");
                 }
             }
@@ -120,15 +119,12 @@ namespace OneSearch
             {
                 DateTime a = DateTime.Now;
                 myLucene.CreateSearcher();
-                searchTerm = searchTerm.ToLower();
-                Query query = LuceneCore.parser.Parse(searchTerm);
-                string processedQuery = query.ToString();
-                FinalWordBox.Text = processedQuery;
-                resultList = myLucene.SearchText(query, numofDoc);
+                resultList = myLucene.SearchText(searchTerm, numofDoc, out string processedQuery);
                 myLucene.CleanUpSearcher();
                 DateTime b = DateTime.Now;
                 TimeSpan c = b - a;
                 double seconds = c.TotalSeconds;
+                FinalWordBox.Text = processedQuery;
                 queryCount++;
                 int numofresult = resultList.Count;
                 TotalResultBox.Text = numofresult.ToString();
@@ -157,6 +153,15 @@ namespace OneSearch
 
         private void ExitApp_Click(object sender, EventArgs e)
         {
+            //clean-up the index folder when exiting the app
+            if (indexPath != "")
+            {
+                DirectoryInfo di = new DirectoryInfo(indexPath);
+                foreach (FileInfo file in di.GetFiles())
+                {
+                    file.Delete();
+                }
+            }
             Application.Exit();
         }
 

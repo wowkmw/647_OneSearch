@@ -96,14 +96,13 @@ namespace OneSearch
         /// Searches the index for the querytext
         /// </summary>
         /// <param name="querytext">The text to search the index</param>
-        public List<Dictionary<string, string>> SearchText(Query querytext, int DocNum)
+        public List<Dictionary<string, string>> SearchText(string querytext, int DocNum, out string processedQuery)
         {
-            //System.Console.WriteLine("Searching for " + querytext);
-            //querytext = querytext.ToLower();
-            //Query query = parser.Parse(querytext);
+            querytext = querytext.ToLower();
+            Query query = parser.Parse(querytext);
             List<Dictionary<string, string>> resultList = new List<Dictionary<string, string>>();
-
-            TopDocs results = searcher.Search(querytext, DocNum);
+            processedQuery = query.ToString();
+            TopDocs results = searcher.Search(query, DocNum);
             
             int rank = 0;
             foreach (ScoreDoc scoreDoc in results.ScoreDocs)
