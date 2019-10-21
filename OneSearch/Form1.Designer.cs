@@ -48,6 +48,7 @@
             this.TotalResult = new System.Windows.Forms.Label();
             this.FinalWordBox = new System.Windows.Forms.TextBox();
             this.TotalResultBox = new System.Windows.Forms.TextBox();
+            this.AsIsBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -98,14 +99,14 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(12, 253);
+            this.textBox3.Location = new System.Drawing.Point(13, 249);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(431, 22);
             this.textBox3.TabIndex = 5;
             // 
             // searchButton
             // 
-            this.searchButton.Location = new System.Drawing.Point(450, 249);
+            this.searchButton.Location = new System.Drawing.Point(450, 245);
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(113, 30);
             this.searchButton.TabIndex = 6;
@@ -186,7 +187,7 @@
             // FinalWord
             // 
             this.FinalWord.AutoSize = true;
-            this.FinalWord.Location = new System.Drawing.Point(12, 333);
+            this.FinalWord.Location = new System.Drawing.Point(12, 359);
             this.FinalWord.Name = "FinalWord";
             this.FinalWord.Size = new System.Drawing.Size(123, 17);
             this.FinalWord.TabIndex = 12;
@@ -195,7 +196,7 @@
             // TotalResult
             // 
             this.TotalResult.AutoSize = true;
-            this.TotalResult.Location = new System.Drawing.Point(12, 393);
+            this.TotalResult.Location = new System.Drawing.Point(12, 419);
             this.TotalResult.Name = "TotalResult";
             this.TotalResult.Size = new System.Drawing.Size(95, 17);
             this.TotalResult.TabIndex = 13;
@@ -203,23 +204,35 @@
             // 
             // FinalWordBox
             // 
-            this.FinalWordBox.Location = new System.Drawing.Point(12, 353);
+            this.FinalWordBox.Location = new System.Drawing.Point(12, 379);
             this.FinalWordBox.Name = "FinalWordBox";
             this.FinalWordBox.Size = new System.Drawing.Size(431, 22);
             this.FinalWordBox.TabIndex = 14;
             // 
             // TotalResultBox
             // 
-            this.TotalResultBox.Location = new System.Drawing.Point(12, 413);
+            this.TotalResultBox.Location = new System.Drawing.Point(12, 439);
             this.TotalResultBox.Name = "TotalResultBox";
             this.TotalResultBox.Size = new System.Drawing.Size(100, 22);
             this.TotalResultBox.TabIndex = 15;
+            // 
+            // AsIsBox
+            // 
+            this.AsIsBox.AutoSize = true;
+            this.AsIsBox.Location = new System.Drawing.Point(13, 289);
+            this.AsIsBox.Name = "AsIsBox";
+            this.AsIsBox.Size = new System.Drawing.Size(110, 21);
+            this.AsIsBox.TabIndex = 16;
+            this.AsIsBox.Text = "Search As-Is";
+            this.AsIsBox.UseVisualStyleBackColor = true;
+            this.AsIsBox.CheckedChanged += new System.EventHandler(this.AsIsBox_CheckedChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1388, 580);
+            this.Controls.Add(this.AsIsBox);
             this.Controls.Add(this.TotalResultBox);
             this.Controls.Add(this.FinalWordBox);
             this.Controls.Add(this.TotalResult);
@@ -267,6 +280,7 @@
         private System.Windows.Forms.Label TotalResult;
         private System.Windows.Forms.TextBox FinalWordBox;
         private System.Windows.Forms.TextBox TotalResultBox;
+        private System.Windows.Forms.CheckBox AsIsBox;
     }
 }
 

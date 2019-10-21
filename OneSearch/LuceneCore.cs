@@ -20,11 +20,13 @@ namespace OneSearch
 {
     public class LuceneCore
     {
-        Lucene.Net.Store.Directory luceneIndexDirectory;
-        Lucene.Net.Analysis.Analyzer analyzer;
-        Lucene.Net.Index.IndexWriter writer;
-        IndexSearcher searcher;
-        public static QueryParser parser;
+        private Lucene.Net.Store.Directory luceneIndexDirectory;
+        private Lucene.Net.Analysis.Analyzer analyzer;
+        private Lucene.Net.Analysis.Analyzer AsIsanalyzer;
+        private Lucene.Net.Index.IndexWriter writer;
+        private IndexSearcher searcher;
+        private QueryParser parser;
+        private QueryParser AsIsparser;
 
         //Lucene.Net.Search.Similarity newSimilarity;
 
@@ -37,11 +39,12 @@ namespace OneSearch
         {
             luceneIndexDirectory = null;
             writer = null;
-            //analyzer = new Lucene.Net.Analysis.WhitespaceAnalyzer();
+            AsIsanalyzer = new Lucene.Net.Analysis.WhitespaceAnalyzer();
             //analyzer = new Lucene.Net.Analysis.Standard.StandardAnalyzer(VERSION);
             analyzer = new Lucene.Net.Analysis.SimpleAnalyzer();
-
+            
             parser = new QueryParser(Lucene.Net.Util.Version.LUCENE_30, TEXT_FN, analyzer);
+            AsIsparser = new QueryParser(Lucene.Net.Util.Version.LUCENE_30, TEXT_FN, AsIsanalyzer);
 
             //newSimilarity = new NewSimilarity();
         }
@@ -96,10 +99,20 @@ namespace OneSearch
         /// Searches the index for the querytext
         /// </summary>
         /// <param name="querytext">The text to search the index</param>
-        public List<Dictionary<string, string>> SearchText(string querytext, int DocNum, out string processedQuery)
+        public List<Dictionary<string, string>> SearchText(string querytext, int DocNum, bool check, out string processedQuery)
         {
-            querytext = querytext.ToLower();
-            Query query = parser.Parse(querytext);
+            Query query;
+            if (check)
+            {
+                //querytext = querytext.ToLower();
+                query = AsIsparser.Parse(querytext);
+            }
+            else
+            {
+                querytext = querytext.ToLower();
+                query = parser.Parse(querytext);
+            }
+            
             List<Dictionary<string, string>> resultList = new List<Dictionary<string, string>>();
             processedQuery = query.ToString();
             TopDocs results = searcher.Search(query, DocNum);

@@ -107,6 +107,8 @@ namespace OneSearch
             ResulttView.Items.Clear();
             ResulttView.Controls.Clear();
             searchTerm = textBox3.Text;
+            string processedQuery;
+            double seconds;
             if (searchTerm is "")
             {
                 MessageBox.Show("Please enter some keyword!");
@@ -117,13 +119,29 @@ namespace OneSearch
             }
             else
             {
-                DateTime a = DateTime.Now;
-                myLucene.CreateSearcher();
-                resultList = myLucene.SearchText(searchTerm, numofDoc, out string processedQuery);
-                myLucene.CleanUpSearcher();
-                DateTime b = DateTime.Now;
-                TimeSpan c = b - a;
-                double seconds = c.TotalSeconds;
+                bool check = false;
+                if (AsIsBox.Checked)
+                {
+                    check = true;
+                    DateTime a = DateTime.Now;
+                    myLucene.CreateSearcher();
+                    resultList = myLucene.SearchText(searchTerm, numofDoc, check, out processedQuery);
+                    myLucene.CleanUpSearcher();
+                    DateTime b = DateTime.Now;
+                    TimeSpan c = b - a;
+                    seconds = c.TotalSeconds;
+                }
+                else
+                {
+                    DateTime a = DateTime.Now;
+                    myLucene.CreateSearcher();
+                    resultList = myLucene.SearchText(searchTerm, numofDoc, check, out processedQuery);
+                    myLucene.CleanUpSearcher();
+                    DateTime b = DateTime.Now;
+                    TimeSpan c = b - a;
+                    seconds = c.TotalSeconds;
+                }
+                
                 FinalWordBox.Text = processedQuery;
                 queryCount++;
                 int numofresult = resultList.Count;
@@ -192,6 +210,11 @@ namespace OneSearch
             {
                 MessageBox.Show("Search something first...");
             }
+        }
+
+        private void AsIsBox_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
