@@ -44,7 +44,6 @@
             this.result = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SaveResults = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.FinalWord = new System.Windows.Forms.Label();
             this.TotalResult = new System.Windows.Forms.Label();
             this.FinalWordBox = new System.Windows.Forms.TextBox();
@@ -55,7 +54,7 @@
             // 
             // jsonButton
             // 
-            this.jsonButton.Location = new System.Drawing.Point(449, 102);
+            this.jsonButton.Location = new System.Drawing.Point(449, 124);
             this.jsonButton.Name = "jsonButton";
             this.jsonButton.Size = new System.Drawing.Size(114, 29);
             this.jsonButton.TabIndex = 0;
@@ -66,7 +65,7 @@
             // buildIndex
             // 
             this.buildIndex.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buildIndex.Location = new System.Drawing.Point(128, 197);
+            this.buildIndex.Location = new System.Drawing.Point(128, 219);
             this.buildIndex.Name = "buildIndex";
             this.buildIndex.Size = new System.Drawing.Size(206, 31);
             this.buildIndex.TabIndex = 1;
@@ -76,7 +75,7 @@
             // 
             // indexButton
             // 
-            this.indexButton.Location = new System.Drawing.Point(449, 150);
+            this.indexButton.Location = new System.Drawing.Point(449, 172);
             this.indexButton.Name = "indexButton";
             this.indexButton.Size = new System.Drawing.Size(114, 30);
             this.indexButton.TabIndex = 2;
@@ -86,28 +85,28 @@
             // 
             // jsonPath
             // 
-            this.jsonPath.Location = new System.Drawing.Point(12, 105);
+            this.jsonPath.Location = new System.Drawing.Point(12, 127);
             this.jsonPath.Name = "jsonPath";
             this.jsonPath.Size = new System.Drawing.Size(431, 22);
             this.jsonPath.TabIndex = 3;
             // 
             // showIndexPath
             // 
-            this.showIndexPath.Location = new System.Drawing.Point(12, 154);
+            this.showIndexPath.Location = new System.Drawing.Point(12, 176);
             this.showIndexPath.Name = "showIndexPath";
             this.showIndexPath.Size = new System.Drawing.Size(431, 22);
             this.showIndexPath.TabIndex = 4;
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(13, 249);
+            this.textBox3.Location = new System.Drawing.Point(13, 271);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(431, 22);
             this.textBox3.TabIndex = 5;
             // 
             // searchButton
             // 
-            this.searchButton.Location = new System.Drawing.Point(450, 245);
+            this.searchButton.Location = new System.Drawing.Point(450, 267);
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(113, 30);
             this.searchButton.TabIndex = 6;
@@ -178,25 +177,15 @@
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(77, 73);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.Size = new System.Drawing.Size(432, 87);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial Black", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(95, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(279, 56);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "One Search";
             // 
             // FinalWord
             // 
             this.FinalWord.AutoSize = true;
-            this.FinalWord.Location = new System.Drawing.Point(12, 359);
+            this.FinalWord.Location = new System.Drawing.Point(12, 381);
             this.FinalWord.Name = "FinalWord";
             this.FinalWord.Size = new System.Drawing.Size(129, 17);
             this.FinalWord.TabIndex = 12;
@@ -205,7 +194,7 @@
             // TotalResult
             // 
             this.TotalResult.AutoSize = true;
-            this.TotalResult.Location = new System.Drawing.Point(12, 419);
+            this.TotalResult.Location = new System.Drawing.Point(12, 441);
             this.TotalResult.Name = "TotalResult";
             this.TotalResult.Size = new System.Drawing.Size(95, 17);
             this.TotalResult.TabIndex = 13;
@@ -213,14 +202,14 @@
             // 
             // FinalWordBox
             // 
-            this.FinalWordBox.Location = new System.Drawing.Point(12, 379);
+            this.FinalWordBox.Location = new System.Drawing.Point(12, 401);
             this.FinalWordBox.Name = "FinalWordBox";
             this.FinalWordBox.Size = new System.Drawing.Size(431, 22);
             this.FinalWordBox.TabIndex = 14;
             // 
             // TotalResultBox
             // 
-            this.TotalResultBox.Location = new System.Drawing.Point(12, 439);
+            this.TotalResultBox.Location = new System.Drawing.Point(12, 461);
             this.TotalResultBox.Name = "TotalResultBox";
             this.TotalResultBox.Size = new System.Drawing.Size(100, 22);
             this.TotalResultBox.TabIndex = 15;
@@ -228,7 +217,7 @@
             // AsIsBox
             // 
             this.AsIsBox.AutoSize = true;
-            this.AsIsBox.Location = new System.Drawing.Point(13, 289);
+            this.AsIsBox.Location = new System.Drawing.Point(13, 311);
             this.AsIsBox.Name = "AsIsBox";
             this.AsIsBox.Size = new System.Drawing.Size(110, 21);
             this.AsIsBox.TabIndex = 16;
@@ -246,7 +235,6 @@
             this.Controls.Add(this.FinalWordBox);
             this.Controls.Add(this.TotalResult);
             this.Controls.Add(this.FinalWord);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.SaveResults);
             this.Controls.Add(this.ResulttView);
@@ -284,7 +272,6 @@
         private System.Windows.Forms.ColumnHeader result;
         private System.Windows.Forms.Button SaveResults;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label FinalWord;
         private System.Windows.Forms.Label TotalResult;
         private System.Windows.Forms.TextBox FinalWordBox;
