@@ -94,8 +94,10 @@ namespace OneSearch
                     myLucene.CleanUpIndexer();
                     DateTime b = DateTime.Now;
                     //double seconds = (b - a).TotalSeconds;
-                    MessageBox.Show("The json file takes " + (jb - ja).TotalSeconds.ToString() + "seconds to be imported\n" 
-                        + "The indexing took " + (b - a).TotalSeconds.ToString() + " seconds");
+                    JsonBS.Text = (jb - ja).TotalSeconds.ToString();
+                    IndexBS.Text = (b - a).TotalSeconds.ToString();
+                    //MessageBox.Show("The json file takes " + (jb - ja).TotalSeconds.ToString() + "seconds to be imported\n" 
+                    //    + "The indexing took " + (b - a).TotalSeconds.ToString() + " seconds");
                     MessageBox.Show("Searcher ready, enter keywords to start searching...");
                 }
             }
@@ -152,7 +154,8 @@ namespace OneSearch
                 queryCount++;
                 int numofresult = resultList.Count;
                 TotalResultBox.Text = numofresult.ToString();
-                MessageBox.Show("Searching time is " + seconds.ToString() + " seconds");
+                SearchBS.Text = seconds.ToString();
+                //MessageBox.Show("Searching time is " + seconds.ToString() + " seconds");
                 if (numofresult < 30)
                 {
                     for (int i = 0; i < numofresult; i++)

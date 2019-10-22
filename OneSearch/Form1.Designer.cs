@@ -49,6 +49,12 @@
             this.FinalWordBox = new System.Windows.Forms.TextBox();
             this.TotalResultBox = new System.Windows.Forms.TextBox();
             this.AsIsBox = new System.Windows.Forms.CheckBox();
+            this.JsonS = new System.Windows.Forms.Label();
+            this.IndexS = new System.Windows.Forms.Label();
+            this.SearchS = new System.Windows.Forms.Label();
+            this.JsonBS = new System.Windows.Forms.TextBox();
+            this.IndexBS = new System.Windows.Forms.TextBox();
+            this.SearchBS = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,13 +70,15 @@
             // 
             // buildIndex
             // 
-            this.buildIndex.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buildIndex.Location = new System.Drawing.Point(128, 219);
+            this.buildIndex.BackColor = System.Drawing.SystemColors.Control;
+            this.buildIndex.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.buildIndex.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buildIndex.Location = new System.Drawing.Point(93, 220);
             this.buildIndex.Name = "buildIndex";
-            this.buildIndex.Size = new System.Drawing.Size(206, 31);
+            this.buildIndex.Size = new System.Drawing.Size(275, 46);
             this.buildIndex.TabIndex = 1;
             this.buildIndex.Text = ">>> Initialize Search Engine";
-            this.buildIndex.UseVisualStyleBackColor = true;
+            this.buildIndex.UseVisualStyleBackColor = false;
             this.buildIndex.Click += new System.EventHandler(this.button2_Click);
             // 
             // indexButton
@@ -99,14 +107,14 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(13, 271);
+            this.textBox3.Location = new System.Drawing.Point(12, 288);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(431, 22);
             this.textBox3.TabIndex = 5;
             // 
             // searchButton
             // 
-            this.searchButton.Location = new System.Drawing.Point(450, 267);
+            this.searchButton.Location = new System.Drawing.Point(449, 284);
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(113, 30);
             this.searchButton.TabIndex = 6;
@@ -177,7 +185,7 @@
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(432, 87);
+            this.pictureBox1.Size = new System.Drawing.Size(374, 87);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
@@ -185,7 +193,7 @@
             // FinalWord
             // 
             this.FinalWord.AutoSize = true;
-            this.FinalWord.Location = new System.Drawing.Point(12, 381);
+            this.FinalWord.Location = new System.Drawing.Point(12, 372);
             this.FinalWord.Name = "FinalWord";
             this.FinalWord.Size = new System.Drawing.Size(129, 17);
             this.FinalWord.TabIndex = 12;
@@ -194,7 +202,7 @@
             // TotalResult
             // 
             this.TotalResult.AutoSize = true;
-            this.TotalResult.Location = new System.Drawing.Point(12, 441);
+            this.TotalResult.Location = new System.Drawing.Point(12, 455);
             this.TotalResult.Name = "TotalResult";
             this.TotalResult.Size = new System.Drawing.Size(95, 17);
             this.TotalResult.TabIndex = 13;
@@ -202,14 +210,14 @@
             // 
             // FinalWordBox
             // 
-            this.FinalWordBox.Location = new System.Drawing.Point(12, 401);
+            this.FinalWordBox.Location = new System.Drawing.Point(12, 392);
             this.FinalWordBox.Name = "FinalWordBox";
             this.FinalWordBox.Size = new System.Drawing.Size(431, 22);
             this.FinalWordBox.TabIndex = 14;
             // 
             // TotalResultBox
             // 
-            this.TotalResultBox.Location = new System.Drawing.Point(12, 461);
+            this.TotalResultBox.Location = new System.Drawing.Point(12, 475);
             this.TotalResultBox.Name = "TotalResultBox";
             this.TotalResultBox.Size = new System.Drawing.Size(100, 22);
             this.TotalResultBox.TabIndex = 15;
@@ -217,7 +225,7 @@
             // AsIsBox
             // 
             this.AsIsBox.AutoSize = true;
-            this.AsIsBox.Location = new System.Drawing.Point(13, 311);
+            this.AsIsBox.Location = new System.Drawing.Point(12, 328);
             this.AsIsBox.Name = "AsIsBox";
             this.AsIsBox.Size = new System.Drawing.Size(110, 21);
             this.AsIsBox.TabIndex = 16;
@@ -225,11 +233,65 @@
             this.AsIsBox.UseVisualStyleBackColor = true;
             this.AsIsBox.CheckedChanged += new System.EventHandler(this.AsIsBox_CheckedChanged);
             // 
+            // JsonS
+            // 
+            this.JsonS.AutoSize = true;
+            this.JsonS.Location = new System.Drawing.Point(283, 455);
+            this.JsonS.Name = "JsonS";
+            this.JsonS.Size = new System.Drawing.Size(59, 17);
+            this.JsonS.TabIndex = 17;
+            this.JsonS.Text = "Json(s):";
+            // 
+            // IndexS
+            // 
+            this.IndexS.AutoSize = true;
+            this.IndexS.Location = new System.Drawing.Point(422, 455);
+            this.IndexS.Name = "IndexS";
+            this.IndexS.Size = new System.Drawing.Size(62, 17);
+            this.IndexS.TabIndex = 18;
+            this.IndexS.Text = "Index(s):";
+            // 
+            // SearchS
+            // 
+            this.SearchS.AutoSize = true;
+            this.SearchS.Location = new System.Drawing.Point(144, 455);
+            this.SearchS.Name = "SearchS";
+            this.SearchS.Size = new System.Drawing.Size(74, 17);
+            this.SearchS.TabIndex = 19;
+            this.SearchS.Text = "Search(s):";
+            // 
+            // JsonBS
+            // 
+            this.JsonBS.Location = new System.Drawing.Point(286, 475);
+            this.JsonBS.Name = "JsonBS";
+            this.JsonBS.Size = new System.Drawing.Size(100, 22);
+            this.JsonBS.TabIndex = 20;
+            // 
+            // IndexBS
+            // 
+            this.IndexBS.Location = new System.Drawing.Point(425, 475);
+            this.IndexBS.Name = "IndexBS";
+            this.IndexBS.Size = new System.Drawing.Size(100, 22);
+            this.IndexBS.TabIndex = 21;
+            // 
+            // SearchBS
+            // 
+            this.SearchBS.Location = new System.Drawing.Point(147, 475);
+            this.SearchBS.Name = "SearchBS";
+            this.SearchBS.Size = new System.Drawing.Size(100, 22);
+            this.SearchBS.TabIndex = 22;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1388, 578);
+            this.Controls.Add(this.SearchBS);
+            this.Controls.Add(this.IndexBS);
+            this.Controls.Add(this.JsonBS);
+            this.Controls.Add(this.SearchS);
+            this.Controls.Add(this.IndexS);
+            this.Controls.Add(this.JsonS);
             this.Controls.Add(this.AsIsBox);
             this.Controls.Add(this.TotalResultBox);
             this.Controls.Add(this.FinalWordBox);
@@ -278,6 +340,12 @@
         private System.Windows.Forms.TextBox TotalResultBox;
         private System.Windows.Forms.CheckBox AsIsBox;
         private System.Windows.Forms.ColumnHeader URL;
+        private System.Windows.Forms.Label JsonS;
+        private System.Windows.Forms.Label IndexS;
+        private System.Windows.Forms.Label SearchS;
+        private System.Windows.Forms.TextBox JsonBS;
+        private System.Windows.Forms.TextBox IndexBS;
+        private System.Windows.Forms.TextBox SearchBS;
     }
 }
 
