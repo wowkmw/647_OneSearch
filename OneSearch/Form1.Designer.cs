@@ -55,10 +55,9 @@
             // 
             // jsonButton
             // 
-            this.jsonButton.Location = new System.Drawing.Point(674, 153);
-            this.jsonButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.jsonButton.Location = new System.Drawing.Point(449, 102);
             this.jsonButton.Name = "jsonButton";
-            this.jsonButton.Size = new System.Drawing.Size(171, 44);
+            this.jsonButton.Size = new System.Drawing.Size(114, 29);
             this.jsonButton.TabIndex = 0;
             this.jsonButton.Text = "JSON Path";
             this.jsonButton.UseVisualStyleBackColor = true;
@@ -67,21 +66,19 @@
             // buildIndex
             // 
             this.buildIndex.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buildIndex.Location = new System.Drawing.Point(192, 296);
-            this.buildIndex.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buildIndex.Location = new System.Drawing.Point(128, 197);
             this.buildIndex.Name = "buildIndex";
-            this.buildIndex.Size = new System.Drawing.Size(309, 46);
+            this.buildIndex.Size = new System.Drawing.Size(206, 31);
             this.buildIndex.TabIndex = 1;
-            this.buildIndex.Text = ">>Initialize Search Engine";
+            this.buildIndex.Text = ">>> Initialize Search Engine";
             this.buildIndex.UseVisualStyleBackColor = true;
             this.buildIndex.Click += new System.EventHandler(this.button2_Click);
             // 
             // indexButton
             // 
-            this.indexButton.Location = new System.Drawing.Point(674, 225);
-            this.indexButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.indexButton.Location = new System.Drawing.Point(449, 150);
             this.indexButton.Name = "indexButton";
-            this.indexButton.Size = new System.Drawing.Size(171, 45);
+            this.indexButton.Size = new System.Drawing.Size(114, 30);
             this.indexButton.TabIndex = 2;
             this.indexButton.Text = "Index Path";
             this.indexButton.UseVisualStyleBackColor = true;
@@ -89,34 +86,30 @@
             // 
             // jsonPath
             // 
-            this.jsonPath.Location = new System.Drawing.Point(18, 158);
-            this.jsonPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.jsonPath.Location = new System.Drawing.Point(12, 105);
             this.jsonPath.Name = "jsonPath";
-            this.jsonPath.Size = new System.Drawing.Size(644, 35);
+            this.jsonPath.Size = new System.Drawing.Size(431, 22);
             this.jsonPath.TabIndex = 3;
             // 
             // showIndexPath
             // 
-            this.showIndexPath.Location = new System.Drawing.Point(18, 231);
-            this.showIndexPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.showIndexPath.Location = new System.Drawing.Point(12, 154);
             this.showIndexPath.Name = "showIndexPath";
-            this.showIndexPath.Size = new System.Drawing.Size(644, 35);
+            this.showIndexPath.Size = new System.Drawing.Size(431, 22);
             this.showIndexPath.TabIndex = 4;
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(20, 374);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox3.Location = new System.Drawing.Point(13, 249);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(644, 35);
+            this.textBox3.Size = new System.Drawing.Size(431, 22);
             this.textBox3.TabIndex = 5;
             // 
             // searchButton
             // 
-            this.searchButton.Location = new System.Drawing.Point(675, 368);
-            this.searchButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.searchButton.Location = new System.Drawing.Point(450, 245);
             this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(170, 45);
+            this.searchButton.Size = new System.Drawing.Size(113, 30);
             this.searchButton.TabIndex = 6;
             this.searchButton.Text = "Search";
             this.searchButton.UseVisualStyleBackColor = true;
@@ -124,10 +117,9 @@
             // 
             // ExitApp
             // 
-            this.ExitApp.Location = new System.Drawing.Point(18, 802);
-            this.ExitApp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ExitApp.Location = new System.Drawing.Point(12, 535);
             this.ExitApp.Name = "ExitApp";
-            this.ExitApp.Size = new System.Drawing.Size(166, 50);
+            this.ExitApp.Size = new System.Drawing.Size(111, 33);
             this.ExitApp.TabIndex = 7;
             this.ExitApp.Text = "EXIT";
             this.ExitApp.UseVisualStyleBackColor = true;
@@ -143,10 +135,9 @@
             this.result});
             this.ResulttView.FullRowSelect = true;
             this.ResulttView.HideSelection = false;
-            this.ResulttView.Location = new System.Drawing.Point(874, 18);
-            this.ResulttView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ResulttView.Location = new System.Drawing.Point(583, 12);
             this.ResulttView.Name = "ResulttView";
-            this.ResulttView.Size = new System.Drawing.Size(1188, 832);
+            this.ResulttView.Size = new System.Drawing.Size(793, 556);
             this.ResulttView.TabIndex = 8;
             this.ResulttView.UseCompatibleStateImageBehavior = false;
             this.ResulttView.View = System.Windows.Forms.View.Details;
@@ -155,29 +146,28 @@
             // rank
             // 
             this.rank.Text = "rank";
-            this.rank.Width = 89;
+            this.rank.Width = 50;
             // 
             // score
             // 
             this.score.Text = "score";
-            this.score.Width = 90;
+            this.score.Width = 70;
             // 
             // URL
             // 
-            this.URL.Text = "URL";
-            this.URL.Width = 79;
+            this.URL.Text = "url";
+            this.URL.Width = 258;
             // 
             // result
             // 
             this.result.Text = "result";
-            this.result.Width = 681;
+            this.result.Width = 409;
             // 
             // SaveResults
             // 
-            this.SaveResults.Location = new System.Drawing.Point(675, 802);
-            this.SaveResults.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.SaveResults.Location = new System.Drawing.Point(450, 535);
             this.SaveResults.Name = "SaveResults";
-            this.SaveResults.Size = new System.Drawing.Size(168, 50);
+            this.SaveResults.Size = new System.Drawing.Size(112, 33);
             this.SaveResults.TabIndex = 9;
             this.SaveResults.Text = "Save Results";
             this.SaveResults.UseVisualStyleBackColor = true;
@@ -186,10 +176,9 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(18, 18);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(116, 110);
+            this.pictureBox1.Size = new System.Drawing.Size(77, 73);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
@@ -198,56 +187,50 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial Black", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(142, 18);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(95, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(444, 90);
+            this.label1.Size = new System.Drawing.Size(279, 56);
             this.label1.TabIndex = 11;
             this.label1.Text = "One Search";
             // 
             // FinalWord
             // 
             this.FinalWord.AutoSize = true;
-            this.FinalWord.Location = new System.Drawing.Point(18, 538);
-            this.FinalWord.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.FinalWord.Location = new System.Drawing.Point(12, 359);
             this.FinalWord.Name = "FinalWord";
-            this.FinalWord.Size = new System.Drawing.Size(226, 24);
+            this.FinalWord.Size = new System.Drawing.Size(129, 17);
             this.FinalWord.TabIndex = 12;
-            this.FinalWord.Text = "Final search word:";
+            this.FinalWord.Text = "Final Search Word:";
             // 
             // TotalResult
             // 
             this.TotalResult.AutoSize = true;
-            this.TotalResult.Location = new System.Drawing.Point(18, 628);
-            this.TotalResult.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.TotalResult.Location = new System.Drawing.Point(12, 419);
             this.TotalResult.Name = "TotalResult";
-            this.TotalResult.Size = new System.Drawing.Size(178, 24);
+            this.TotalResult.Size = new System.Drawing.Size(95, 17);
             this.TotalResult.TabIndex = 13;
             this.TotalResult.Text = "Total Results:";
             // 
             // FinalWordBox
             // 
-            this.FinalWordBox.Location = new System.Drawing.Point(18, 568);
-            this.FinalWordBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.FinalWordBox.Location = new System.Drawing.Point(12, 379);
             this.FinalWordBox.Name = "FinalWordBox";
-            this.FinalWordBox.Size = new System.Drawing.Size(644, 35);
+            this.FinalWordBox.Size = new System.Drawing.Size(431, 22);
             this.FinalWordBox.TabIndex = 14;
             // 
             // TotalResultBox
             // 
-            this.TotalResultBox.Location = new System.Drawing.Point(18, 658);
-            this.TotalResultBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TotalResultBox.Location = new System.Drawing.Point(12, 439);
             this.TotalResultBox.Name = "TotalResultBox";
-            this.TotalResultBox.Size = new System.Drawing.Size(148, 35);
+            this.TotalResultBox.Size = new System.Drawing.Size(100, 22);
             this.TotalResultBox.TabIndex = 15;
             // 
             // AsIsBox
             // 
             this.AsIsBox.AutoSize = true;
-            this.AsIsBox.Location = new System.Drawing.Point(20, 434);
-            this.AsIsBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.AsIsBox.Location = new System.Drawing.Point(13, 289);
             this.AsIsBox.Name = "AsIsBox";
-            this.AsIsBox.Size = new System.Drawing.Size(186, 28);
+            this.AsIsBox.Size = new System.Drawing.Size(110, 21);
             this.AsIsBox.TabIndex = 16;
             this.AsIsBox.Text = "Search As-Is";
             this.AsIsBox.UseVisualStyleBackColor = true;
@@ -255,9 +238,9 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2082, 870);
+            this.ClientSize = new System.Drawing.Size(1388, 578);
             this.Controls.Add(this.AsIsBox);
             this.Controls.Add(this.TotalResultBox);
             this.Controls.Add(this.FinalWordBox);
@@ -276,7 +259,6 @@
             this.Controls.Add(this.buildIndex);
             this.Controls.Add(this.jsonButton);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.Text = "OneSearch";
             this.Load += new System.EventHandler(this.Form1_Load);

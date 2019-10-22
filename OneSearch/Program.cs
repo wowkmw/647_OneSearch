@@ -9,7 +9,7 @@ using Newtonsoft.Json.Linq;
 
 namespace OneSearch
 {
-    static class Program
+    public static class Program
     {
         /// <summary>
         /// The main entry point for the application.
@@ -20,7 +20,6 @@ namespace OneSearch
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
-            // This is Bill
         }
         public static void ResultSaver(int queryCout, List<Dictionary<string, string>> resultList, string filePath )
         {
@@ -29,8 +28,8 @@ namespace OneSearch
             int counter = 0;
             foreach (var a in resultList)
             {
-                writer.WriteLine("00"+queryCout.ToString() + "\tQ0\t" + resultList[counter]["passID"] + "\t" + resultList[counter]["rank"] + "\t" +
-                    resultList[counter]["score"] + "\tBaselineSystem");
+                writer.WriteLine(resultList[counter]["qID"] + "\tQ0\t" + resultList[counter]["passID"] +
+                    "\t" + resultList[counter]["rank"] + "\t" + resultList[counter]["score"] + " \tBaselineSystem");
                 counter++;
             }
             writer.Dispose();
@@ -47,7 +46,8 @@ namespace OneSearch
                 {
                     if (collection[counter]["passages"][meter]["is_selected"].ToString() == "1")
                     {
-                        writer2.WriteLine(String.Format("{0}\t0\t{1}\t1", collection[counter]["query_id"], collection[counter]["passages"][meter]["passage_ID"]));
+                        writer2.WriteLine(String.Format("{0}\t0\t{1}\t1", collection[counter]["query_id"], 
+                            collection[counter]["passages"][meter]["passage_ID"]));
                     }
                     meter++;
                 }
@@ -65,7 +65,8 @@ namespace OneSearch
                 int meter = 0;
                 foreach (var b in collection[counter]["passages"])
                 {                    
-                    writer2.WriteLine(String.Format("{0}\t0\t{1}\t1", collection[counter]["query_id"], collection[counter]["passages"][meter]["passage_ID"]));                   
+                    writer2.WriteLine(String.Format("{0}\t0\t{1}\t1", collection[counter]["query_id"], 
+                        collection[counter]["passages"][meter]["passage_ID"]));                   
                     meter++;
                 }
                 counter++;

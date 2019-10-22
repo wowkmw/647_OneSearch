@@ -9,10 +9,10 @@ using Newtonsoft.Json;
 
 namespace OneSearch
 {
-    class JsonImport
+    internal class JsonImport
     {
-        public JArray collection;
-        public JArray JsonCollection(string path)
+        internal JArray collection;
+        internal JArray JsonCollection(string path)
         {
             //Console.WriteLine("Loading collection.json file to the system...");
             StreamReader sr = new StreamReader(path);

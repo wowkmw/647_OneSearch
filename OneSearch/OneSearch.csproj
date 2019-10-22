@@ -36,9 +36,6 @@
     <Reference Include="Lucene.Net">
       <HintPath>..\..\..\Workshops\3\Apache-Lucene.Net-3.0.3-RC2.bin\NET40\bin\Lucene.Net.dll</HintPath>
     </Reference>
-    <Reference Include="Lucene.Net.Contrib.Core">
-      <HintPath>..\..\..\Workshops\3\Apache-Lucene.Net-3.0.3-RC2.bin\NET40\bin\Contrib\Lucene.Net.Contrib.Core.dll</HintPath>
-    </Reference>
     <Reference Include="Lucene.Net.Contrib.Snowball">
       <HintPath>..\..\..\Workshops\3\Apache-Lucene.Net-3.0.3-RC2.bin\NET40\bin\Contrib\Lucene.Net.Contrib.Snowball.dll</HintPath>
     </Reference>

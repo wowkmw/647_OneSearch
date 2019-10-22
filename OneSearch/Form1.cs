@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
 using Lucene.Net.Search;
@@ -25,8 +26,8 @@ namespace OneSearch
         private string searchTerm = "";
         private List<Dictionary<string, string>> resultList;
         private int queryCount = 0;
-        //private int numofDoc = 82326;
-        private int numofDoc = 10000;
+        private int numofDoc = 82326;
+        //private int numofDoc = 10000;
 
         public Form1()
         {
@@ -65,14 +66,13 @@ namespace OneSearch
                     JsonImport myJson = new JsonImport();
                     collection = myJson.JsonCollection(jsonFilePath);
                     DateTime jb = DateTime.Now;
-                    TimeSpan jc = jb - ja;
-                    double jseconds = jc.TotalSeconds;
+                    //double jseconds = (jb - ja).TotalSeconds;
                     //Save the cranqrel1.txt and cranquel2.txt for evaluation
-                    //string filepath2 = @"C:\Users\MKUO\Dropbox\QUT\647\project\results\cranqrel1.txt";
-                    string filepath2 = @"C:\Users\bill6\Downloads\Semester4\IFN647 Advanced Information Storage and Retrieval\Assessment_2\cranqrel1.txt";
+                    string filepath2 = @"C:\Users\MKUO\Dropbox\QUT\647\project\results\cranqrel1.txt";
+                    //string filepath2 = @"C:\Users\bill6\Downloads\Semester4\IFN647 Advanced Information Storage and Retrieval\Assessment_2\cranqrel1.txt";
                     Program.CranSaver(filepath2,collection);
-                    //string filepath3 = @"C:\Users\MKUO\Dropbox\QUT\647\project\results\cranqrel2.txt";
-                    string filepath3 = @"C:\Users\bill6\Downloads\Semester4\IFN647 Advanced Information Storage and Retrieval\Assessment_2\cranqrel2.txt";
+                    string filepath3 = @"C:\Users\MKUO\Dropbox\QUT\647\project\results\cranqrel2.txt";
+                    //string filepath3 = @"C:\Users\bill6\Downloads\Semester4\IFN647 Advanced Information Storage and Retrieval\Assessment_2\cranqrel2.txt";
                     Program.CranSaver2(filepath3, collection);
                     myLucene = new LuceneCore();
                     DateTime a = DateTime.Now;
@@ -85,16 +85,17 @@ namespace OneSearch
                         {
                             myLucene.IndexText(collection[docID]["passages"][i]["url"].ToString(),
                                 collection[docID]["passages"][i]["passage_ID"].ToString(), 
-                                collection[docID]["passages"][i]["passage_text"].ToString());
+                                collection[docID]["passages"][i]["passage_text"].ToString(),
+                                collection[docID]["query_id"].ToString());
                             i++;
                         }
                         docID++;
                     }
                     myLucene.CleanUpIndexer();
                     DateTime b = DateTime.Now;
-                    TimeSpan c = b - a;
-                    double seconds = c.TotalSeconds;
-                    MessageBox.Show("The json file takes " + jseconds.ToString() + "seconds to be imported\n" + "The indexing took " + seconds.ToString() + " seconds");
+                    //double seconds = (b - a).TotalSeconds;
+                    MessageBox.Show("The json file takes " + (jb - ja).TotalSeconds.ToString() + "seconds to be imported\n" 
+                        + "The indexing took " + (b - a).TotalSeconds.ToString() + " seconds");
                     MessageBox.Show("Searcher ready, enter keywords to start searching...");
                 }
             }
@@ -135,8 +136,7 @@ namespace OneSearch
                     resultList = myLucene.SearchText(searchTerm, numofDoc, check, out processedQuery);
                     myLucene.CleanUpSearcher();
                     DateTime b = DateTime.Now;
-                    TimeSpan c = b - a;
-                    seconds = c.TotalSeconds;
+                    seconds = (b - a).TotalSeconds;
                 }
                 else
                 {
@@ -145,17 +145,15 @@ namespace OneSearch
                     resultList = myLucene.SearchText(searchTerm, numofDoc, check, out processedQuery);
                     myLucene.CleanUpSearcher();
                     DateTime b = DateTime.Now;
-                    TimeSpan c = b - a;
-                    seconds = c.TotalSeconds;
+                    seconds = (b - a).TotalSeconds;
                 }
                 
                 FinalWordBox.Text = processedQuery;
                 queryCount++;
                 int numofresult = resultList.Count;
                 TotalResultBox.Text = numofresult.ToString();
-                MessageBox.Show("The searching took " + seconds.ToString() + " seconds");
-                MessageBox.Show("Number of results is " + numofresult + "\nShowing the first 20 results...");
-                if (numofresult < 20)
+                MessageBox.Show("Searching time is " + seconds.ToString() + " seconds");
+                if (numofresult < 30)
                 {
                     for (int i = 0; i < numofresult; i++)
                     {
@@ -166,7 +164,7 @@ namespace OneSearch
                 }
                 else
                 {
-                    for (int i = 0; i < 20; i++)
+                    for (int i = 0; i < 30; i++)
                     {
                         string[] row = { resultList[i]["rank"], resultList[i]["score"], resultList[i]["url"], resultList[i]["result"] };
                         var listViewItem = new ListViewItem(row);

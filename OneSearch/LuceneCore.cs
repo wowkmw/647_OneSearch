@@ -30,10 +30,11 @@ namespace OneSearch
 
         Lucene.Net.Search.Similarity newSimilarity;
 
-        const Lucene.Net.Util.Version VERSION = Lucene.Net.Util.Version.LUCENE_30;
-        const string TEXT_FN = "Text";
-        const string passID = "pID";
-        const string passText = "pText";
+        private const Lucene.Net.Util.Version VERSION = Lucene.Net.Util.Version.LUCENE_30;
+        private const string TEXT_FN = "Text";
+        private const string passID = "pID";
+        private const string passText = "pText";
+        private const string qID = "qID";
 
 
         public LuceneCore()
@@ -50,7 +51,6 @@ namespace OneSearch
                                 "wants was we were what when where which while who whom why " +
                                 "will with would yet you your";
             string[] stopArray = STOPWORDS.Split();
-
             luceneIndexDirectory = null;
             writer = null;
             AsIsanalyzer = new Lucene.Net.Analysis.WhitespaceAnalyzer();
@@ -79,18 +79,20 @@ namespace OneSearch
         /// Indexes a given string into the index
         /// </summary>
         /// <param name="text">The text to index</param>
-        public void IndexText(string text, string id, string passT)
+        public void IndexText(string text, string id, string passT, string queryID)
         {
             //using only the url for indexing
             Field field = new Field(TEXT_FN, text, Field.Store.YES, Field.Index.ANALYZED, Field.TermVector.NO);
             //using only the url for indexing
             Field idField = new Field(passID, id, Field.Store.YES, Field.Index.NO, Field.TermVector.NO);
             Field textField = new Field(passText, passT, Field.Store.YES, Field.Index.NO, Field.TermVector.NO);
+            Field qIDField = new Field(qID, queryID, Field.Store.YES, Field.Index.NO, Field.TermVector.NO);
             Document doc = new Document();
             
             doc.Add(field);
             doc.Add(idField);
             doc.Add(textField);
+            doc.Add(qIDField);
             writer.AddDocument(doc);
         }
 
@@ -123,7 +125,6 @@ namespace OneSearch
             Query query;
             if (check)
             {
-                //querytext = querytext.ToLower();
                 query = AsIsparser.Parse("\"" + querytext + "\"");
             }
             else
@@ -146,14 +147,14 @@ namespace OneSearch
                 string myFieldValue = doc.Get(TEXT_FN).ToString();
                 string myPassID = doc.Get(passID).ToString();
                 string myPassText = doc.Get(passText).ToString();
+                string queryID = doc.Get(qID).ToString();
                 dict.Add("rank", rank.ToString());
                 dict.Add("score", scoreDoc.Score.ToString());
                 dict.Add("result", myPassText.ToString());
                 dict.Add("passID", myPassID.ToString());
                 dict.Add("url", myFieldValue.ToString());
-                //resultText += "Rank: " + rank + " Score: " + scoreDoc.Score + "\nResult: " + myFieldValue + "\n\n";
+                dict.Add("qID", queryID.ToString());
                 resultList.Add(dict);
-
             }
             return resultList;
         }
