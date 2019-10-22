@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json.Linq;
+
 
 namespace OneSearch
 {
@@ -20,9 +22,10 @@ namespace OneSearch
             Application.Run(new Form1());
             // This is Bill
         }
-        public static void ResultSaver(int queryCout, List<Dictionary<string, string>> resultList, string filePath)
+        public static void ResultSaver(int queryCout, List<Dictionary<string, string>> resultList, string filePath, string filepath2, JArray collection)
         {
             StreamWriter writer = new StreamWriter(filePath, append: true);
+            
             int counter = 0;
             foreach (var a in resultList)
             {
@@ -32,6 +35,24 @@ namespace OneSearch
             }
             writer.Dispose();
             writer.Close();
+            StreamWriter writer2 = new StreamWriter(filepath2);
+            counter = 0;
+            foreach (var a in collection)
+            {
+                int meter = 0;
+                foreach (var b in collection[counter]["passages"])
+                {
+                    if (collection[counter]["passages"][meter]["is_selected"].ToString() == "1")
+                    {
+                        writer2.WriteLine(String.Format("{0}\t0\t{1}\t1", collection[counter]["query_id"], collection[counter]["passages"][meter]["passage_ID"]));
+                    }
+                    meter++;
+                }
+                counter++;
+            }
+            writer2.Dispose();
+            writer2.Close();
+
         }
     }
 }

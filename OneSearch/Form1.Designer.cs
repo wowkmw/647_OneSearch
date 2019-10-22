@@ -49,6 +49,7 @@
             this.FinalWordBox = new System.Windows.Forms.TextBox();
             this.TotalResultBox = new System.Windows.Forms.TextBox();
             this.AsIsBox = new System.Windows.Forms.CheckBox();
+            this.URL = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -126,10 +127,13 @@
             // 
             // ResulttView
             // 
+            this.ResulttView.Activation = System.Windows.Forms.ItemActivation.TwoClick;
             this.ResulttView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.rank,
             this.score,
+            this.URL,
             this.result});
+            this.ResulttView.FullRowSelect = true;
             this.ResulttView.HideSelection = false;
             this.ResulttView.Location = new System.Drawing.Point(583, 12);
             this.ResulttView.Name = "ResulttView";
@@ -227,6 +231,10 @@
             this.AsIsBox.UseVisualStyleBackColor = true;
             this.AsIsBox.CheckedChanged += new System.EventHandler(this.AsIsBox_CheckedChanged);
             // 
+            // URL
+            // 
+            this.URL.Text = "URL";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -281,6 +289,7 @@
         private System.Windows.Forms.TextBox FinalWordBox;
         private System.Windows.Forms.TextBox TotalResultBox;
         private System.Windows.Forms.CheckBox AsIsBox;
+        private System.Windows.Forms.ColumnHeader URL;
     }
 }
 

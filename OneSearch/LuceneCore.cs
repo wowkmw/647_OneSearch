@@ -12,7 +12,7 @@ using Lucene.Net.Search; // for IndexSearcher
 using Lucene.Net.QueryParsers;  // for QueryParser
 using System.Windows.Forms;
 using System.Collections.Generic;
-//using Lucene.Net.Analysis.Snowball; // for snowball analyser 
+using Lucene.Net.Analysis.Snowball; // for snowball analyser 
 //using Newtonsoft.Json;
 //using Newtonsoft.Json.Linq; //for jarray
 
@@ -33,16 +33,31 @@ namespace OneSearch
         const Lucene.Net.Util.Version VERSION = Lucene.Net.Util.Version.LUCENE_30;
         const string TEXT_FN = "Text";
         const string passID = "pID";
+        const string passText = "pText";
 
 
         public LuceneCore()
         {
+            //the stopword is adapted from https://github.com/pyelasticsearch/pyelasticsearch
+            string STOPWORDS = "a able about across after all almost also am among an and " +
+                                "any are as at be because been but by can cannot could dear " +
+                                "did do does either else ever every for from get got had has " +
+                                "have he her hers him his how however i if in into is it its " +
+                                "just least let like likely may me might most must my " +
+                                "neither no nor not of off often on only or other our own " +
+                                "rather said say says she should since so some than that the " +
+                                "their them then there these they this tis to too twas us " +
+                                "wants was we were what when where which while who whom why " +
+                                "will with would yet you your";
+            string[] stopArray = STOPWORDS.Split();
+
             luceneIndexDirectory = null;
             writer = null;
             AsIsanalyzer = new Lucene.Net.Analysis.WhitespaceAnalyzer();
             //analyzer = new Lucene.Net.Analysis.Standard.StandardAnalyzer(VERSION);
-            analyzer = new Lucene.Net.Analysis.SimpleAnalyzer();
-            
+            //analyzer = new Lucene.Net.Analysis.SimpleAnalyzer();
+            analyzer = new Lucene.Net.Analysis.Snowball.SnowballAnalyzer(VERSION, "English", stopArray);
+
             parser = new QueryParser(Lucene.Net.Util.Version.LUCENE_30, TEXT_FN, analyzer);
             AsIsparser = new QueryParser(Lucene.Net.Util.Version.LUCENE_30, TEXT_FN, AsIsanalyzer);
 
@@ -64,14 +79,18 @@ namespace OneSearch
         /// Indexes a given string into the index
         /// </summary>
         /// <param name="text">The text to index</param>
-        public void IndexText(string text, string id)
+        public void IndexText(string text, string id, string passT)
         {
-
-            Field field = new Field(TEXT_FN, text, Field.Store.YES, Field.Index.ANALYZED_NO_NORMS, Field.TermVector.NO);
-            Field idField = new Field(passID, id, Field.Store.YES, Field.Index.ANALYZED_NO_NORMS, Field.TermVector.NO);
+            //using only the url for indexing
+            Field field = new Field(TEXT_FN, text, Field.Store.YES, Field.Index.ANALYZED, Field.TermVector.NO);
+            //using only the url for indexing
+            Field idField = new Field(passID, id, Field.Store.YES, Field.Index.NO, Field.TermVector.NO);
+            Field textField = new Field(passText, passT, Field.Store.YES, Field.Index.NO, Field.TermVector.NO);
             Document doc = new Document();
+            
             doc.Add(field);
             doc.Add(idField);
+            doc.Add(textField);
             writer.AddDocument(doc);
         }
 
@@ -105,7 +124,7 @@ namespace OneSearch
             if (check)
             {
                 //querytext = querytext.ToLower();
-                query = AsIsparser.Parse(querytext);
+                query = AsIsparser.Parse("\"" + querytext + "\"");
             }
             else
             {
@@ -126,10 +145,12 @@ namespace OneSearch
                 Lucene.Net.Documents.Document doc = searcher.Doc(scoreDoc.Doc);
                 string myFieldValue = doc.Get(TEXT_FN).ToString();
                 string myPassID = doc.Get(passID).ToString();
+                string myPassText = doc.Get(passText).ToString();
                 dict.Add("rank", rank.ToString());
                 dict.Add("score", scoreDoc.Score.ToString());
-                dict.Add("result", myFieldValue.ToString());
+                dict.Add("result", myPassText.ToString());
                 dict.Add("passID", myPassID.ToString());
+                dict.Add("url", myFieldValue.ToString());
                 //resultText += "Rank: " + rank + " Score: " + scoreDoc.Score + "\nResult: " + myFieldValue + "\n\n";
                 resultList.Add(dict);
                 //Explanation ex = searcher.Explain(query, scoreDoc.Doc);
