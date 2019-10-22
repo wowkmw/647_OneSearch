@@ -67,7 +67,13 @@ namespace OneSearch
                     DateTime jb = DateTime.Now;
                     TimeSpan jc = jb - ja;
                     double jseconds = jc.TotalSeconds;
-                    
+                    //Save the cranqrel1.txt and cranquel2.txt for evaluation
+                    //string filepath2 = @"C:\Users\MKUO\Dropbox\QUT\647\project\results\cranqrel1.txt";
+                    string filepath2 = @"C:\Users\bill6\Downloads\Semester4\IFN647 Advanced Information Storage and Retrieval\Assessment_2\cranqrel1.txt";
+                    Program.CranSaver(filepath2,collection);
+                    //string filepath3 = @"C:\Users\MKUO\Dropbox\QUT\647\project\results\cranqrel2.txt";
+                    string filepath3 = @"C:\Users\bill6\Downloads\Semester4\IFN647 Advanced Information Storage and Retrieval\Assessment_2\cranqrel2.txt";
+                    Program.CranSaver2(filepath3, collection);
                     myLucene = new LuceneCore();
                     DateTime a = DateTime.Now;
                     myLucene.CreateIndex(indexPath);
@@ -206,33 +212,7 @@ namespace OneSearch
             {
                 if (filepath != "")
                 {
-                    string filepath2 = @"C:\Users\MKUO\Dropbox\QUT\647\project\results\cranqrel1.txt";
-                    Program.ResultSaver(queryCount, resultList, filepath, filepath2, collection);
-                    //StreamWriter writer2 = new StreamWriter(filepath2);
-                    
-                    //int counter = 0;
-                    //foreach (var a in collection)
-                    //{
-                    //    int meter = 0;
-                    //    foreach (var b in collection[counter]["passage"])
-                    //    {
-                    //        if (collection[counter]["passage"][meter]["is_selected"].ToString() == "1")
-                    //        {
-                    //            writer2.WriteLine(String.Format("{0}\t0\t{1}\t1", collection[counter]["query_id"], collection[counter]["passage"][meter]["passage_ID"]));
-                    //        }
-                    //        meter++;
-                    //    }
-                    //    //for (int i = 0; i < collection[counter]["passage"].Count(); i++)
-                    //    //{
-                    //    //    if (collection[counter]["passage"][i]["is_selected"].ToString() == "1")
-                    //    //    {
-                    //    //        writer2.WriteLine(String.Format("{0}\t0\t{1}\t1", collection[counter]["query_id"], collection[counter]["passage"][i]["passage_ID"]));
-                    //    //    }
-                    //    //}
-                    //    counter++;
-                    //}
-                    //writer2.Dispose();
-                    //writer2.Close();
+                    Program.ResultSaver(queryCount, resultList, filepath);              
                 }
             }
             else

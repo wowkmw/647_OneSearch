@@ -34,13 +34,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Lucene.Net">
-      <HintPath>..\..\..\..\Dropbox\QUT\647\prac\Apache-Lucene.Net-3.0.3-RC2.bin\NET40\bin\Lucene.Net.dll</HintPath>
+      <HintPath>..\..\..\Workshops\3\Apache-Lucene.Net-3.0.3-RC2.bin\NET40\bin\Lucene.Net.dll</HintPath>
     </Reference>
-    <Reference Include="Lucene.Net.Contrib.Analyzers">
-      <HintPath>..\..\..\..\Dropbox\QUT\647\prac\Apache-Lucene.Net-3.0.3-RC2.bin\NET40\bin\Contrib\Lucene.Net.Contrib.Analyzers.dll</HintPath>
+    <Reference Include="Lucene.Net.Contrib.Core">
+      <HintPath>..\..\..\Workshops\3\Apache-Lucene.Net-3.0.3-RC2.bin\NET40\bin\Contrib\Lucene.Net.Contrib.Core.dll</HintPath>
     </Reference>
     <Reference Include="Lucene.Net.Contrib.Snowball">
-      <HintPath>..\..\..\..\Dropbox\QUT\647\prac\Apache-Lucene.Net-3.0.3-RC2.bin\NET40\bin\Contrib\Lucene.Net.Contrib.Snowball.dll</HintPath>
+      <HintPath>..\..\..\Workshops\3\Apache-Lucene.Net-3.0.3-RC2.bin\NET40\bin\Contrib\Lucene.Net.Contrib.Snowball.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -72,6 +72,7 @@
     </Compile>
     <Compile Include="JsonImport.cs" />
     <Compile Include="LuceneCore.cs" />
+    <Compile Include="NewSimilarity.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">

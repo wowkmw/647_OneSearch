@@ -28,7 +28,7 @@ namespace OneSearch
         private QueryParser parser;
         private QueryParser AsIsparser;
 
-        //Lucene.Net.Search.Similarity newSimilarity;
+        Lucene.Net.Search.Similarity newSimilarity;
 
         const Lucene.Net.Util.Version VERSION = Lucene.Net.Util.Version.LUCENE_30;
         const string TEXT_FN = "Text";
@@ -61,7 +61,7 @@ namespace OneSearch
             parser = new QueryParser(Lucene.Net.Util.Version.LUCENE_30, TEXT_FN, analyzer);
             AsIsparser = new QueryParser(Lucene.Net.Util.Version.LUCENE_30, TEXT_FN, AsIsanalyzer);
 
-            //newSimilarity = new NewSimilarity();
+            newSimilarity = new NewSimilarity();
         }
         /// <summary>
         /// Creates the index at a given path
@@ -72,7 +72,7 @@ namespace OneSearch
             luceneIndexDirectory = Lucene.Net.Store.FSDirectory.Open(indexPath);
             IndexWriter.MaxFieldLength mfl = new IndexWriter.MaxFieldLength(IndexWriter.DEFAULT_MAX_FIELD_LENGTH);
             writer = new Lucene.Net.Index.IndexWriter(luceneIndexDirectory, analyzer, true, mfl);
-            //writer.SetSimilarity(newSimilarity);
+            writer.SetSimilarity(newSimilarity);
         }
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace OneSearch
         public void CreateSearcher()
         {
             searcher = new IndexSearcher(luceneIndexDirectory);
-            //searcher.Similarity = newSimilarity;
+            searcher.Similarity = newSimilarity;
         }
 
         /// <summary>
@@ -153,8 +153,7 @@ namespace OneSearch
                 dict.Add("url", myFieldValue.ToString());
                 //resultText += "Rank: " + rank + " Score: " + scoreDoc.Score + "\nResult: " + myFieldValue + "\n\n";
                 resultList.Add(dict);
-                //Explanation ex = searcher.Explain(query, scoreDoc.Doc);
-                //Console.WriteLine(ex);
+
             }
             return resultList;
         }
