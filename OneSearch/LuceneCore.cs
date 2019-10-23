@@ -53,7 +53,7 @@ namespace OneSearch
             string[] stopArray = STOPWORDS.Split();
             luceneIndexDirectory = null;
             writer = null;
-            AsIsanalyzer = new Lucene.Net.Analysis.WhitespaceAnalyzer();
+            AsIsanalyzer = new Lucene.Net.Analysis.KeywordAnalyzer();
             //analyzer = new Lucene.Net.Analysis.Standard.StandardAnalyzer(VERSION);
             //analyzer = new Lucene.Net.Analysis.SimpleAnalyzer();
             analyzer = new Lucene.Net.Analysis.Snowball.SnowballAnalyzer(VERSION, "English", stopArray);
@@ -83,6 +83,7 @@ namespace OneSearch
         {
             //using only the url for indexing
             Field field = new Field(TEXT_FN, text, Field.Store.YES, Field.Index.ANALYZED, Field.TermVector.NO);
+            field.Boost = 2; //boost the only index we have
             //using only the url for indexing
             Field idField = new Field(passID, id, Field.Store.YES, Field.Index.NO, Field.TermVector.NO);
             Field textField = new Field(passText, passT, Field.Store.YES, Field.Index.NO, Field.TermVector.NO);
@@ -125,7 +126,7 @@ namespace OneSearch
             Query query;
             if (check)
             {
-                query = AsIsparser.Parse("\"" + querytext + "\"");
+                query = AsIsparser.Parse("\""+ querytext + "\"");
             }
             else
             {

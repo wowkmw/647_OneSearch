@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
 using Lucene.Net.Search;
+using NHunspell;
 
 
 
@@ -28,6 +29,7 @@ namespace OneSearch
         private int queryCount = 0;
         private int numofDoc = 82326;
         //private int numofDoc = 10000;
+        private Hunspell hunspell;
 
         public Form1()
         {
@@ -66,14 +68,13 @@ namespace OneSearch
                     JsonImport myJson = new JsonImport();
                     collection = myJson.JsonCollection(jsonFilePath);
                     DateTime jb = DateTime.Now;
-                    //double jseconds = (jb - ja).TotalSeconds;
                     //Save the cranqrel1.txt and cranquel2.txt for evaluation
-                    string filepath2 = @"C:\Users\MKUO\Dropbox\QUT\647\project\results\cranqrel1.txt";
+                    //string filepath2 = @"C:\Users\MKUO\Dropbox\QUT\647\project\results\cranqrel1.txt";
                     //string filepath2 = @"C:\Users\bill6\Downloads\Semester4\IFN647 Advanced Information Storage and Retrieval\Assessment_2\cranqrel1.txt";
-                    Program.CranSaver(filepath2,collection);
-                    string filepath3 = @"C:\Users\MKUO\Dropbox\QUT\647\project\results\cranqrel2.txt";
+                    //Program.CranSaver(filepath2,collection);
+                    //string filepath3 = @"C:\Users\MKUO\Dropbox\QUT\647\project\results\cranqrel2.txt";
                     //string filepath3 = @"C:\Users\bill6\Downloads\Semester4\IFN647 Advanced Information Storage and Retrieval\Assessment_2\cranqrel2.txt";
-                    Program.CranSaver2(filepath3, collection);
+                    //Program.CranSaver2(filepath3, collection);
                     myLucene = new LuceneCore();
                     DateTime a = DateTime.Now;
                     myLucene.CreateIndex(indexPath);
@@ -93,11 +94,8 @@ namespace OneSearch
                     }
                     myLucene.CleanUpIndexer();
                     DateTime b = DateTime.Now;
-                    //double seconds = (b - a).TotalSeconds;
                     JsonBS.Text = (jb - ja).TotalSeconds.ToString();
                     IndexBS.Text = (b - a).TotalSeconds.ToString();
-                    //MessageBox.Show("The json file takes " + (jb - ja).TotalSeconds.ToString() + "seconds to be imported\n" 
-                    //    + "The indexing took " + (b - a).TotalSeconds.ToString() + " seconds");
                     MessageBox.Show("Searcher ready, enter keywords to start searching...");
                 }
             }
@@ -129,6 +127,7 @@ namespace OneSearch
             }
             else
             {
+                hunspell = new Hunspell("en_us.aff", "en_us.dic");
                 bool check = false;
                 if (AsIsBox.Checked)
                 {
@@ -142,6 +141,24 @@ namespace OneSearch
                 }
                 else
                 {
+                    if (SpellCheckB.Checked)
+                    {
+                        if (hunspell.Spell(searchTerm))
+                        {
+                        }
+                        else
+                        {
+                            List<string> suggesstions = new List<string>();
+                            suggesstions = hunspell.Suggest(searchTerm);
+                            string suggestedWord = "Spell Check Suggestions: ";
+                            foreach (string item in suggesstions)
+                            {
+                                suggestedWord = suggestedWord + " " + item;
+                            }
+                            MessageBox.Show(suggestedWord);
+                        }
+                        
+                    }
                     DateTime a = DateTime.Now;
                     myLucene.CreateSearcher();
                     resultList = myLucene.SearchText(searchTerm, numofDoc, check, out processedQuery);
@@ -155,7 +172,6 @@ namespace OneSearch
                 int numofresult = resultList.Count;
                 TotalResultBox.Text = numofresult.ToString();
                 SearchBS.Text = seconds.ToString();
-                //MessageBox.Show("Searching time is " + seconds.ToString() + " seconds");
                 if (numofresult < 30)
                 {
                     for (int i = 0; i < numofresult; i++)
@@ -224,7 +240,27 @@ namespace OneSearch
 
         private void AsIsBox_CheckedChanged(object sender, EventArgs e)
         {
+            if (AsIsBox.Checked)
+            {
+                SpellCheckB.Enabled = false;
+            }
+            else if (!AsIsBox.Checked)
+            {
+                SpellCheckB.Enabled = true;
+            }
+            
+        }
 
+        private void SpellCheckB_CheckedChanged(object sender, EventArgs e)
+        {
+            if (SpellCheckB.Checked)
+            {
+                AsIsBox.Enabled = false;
+            }
+            else if (!SpellCheckB.Checked)
+            {
+                AsIsBox.Enabled = true;
+            }
         }
     }
 }
