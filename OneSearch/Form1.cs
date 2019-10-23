@@ -87,7 +87,8 @@ namespace OneSearch
                             myLucene.IndexText(collection[docID]["passages"][i]["url"].ToString(),
                                 collection[docID]["passages"][i]["passage_ID"].ToString(), 
                                 collection[docID]["passages"][i]["passage_text"].ToString(),
-                                collection[docID]["query_id"].ToString());
+                                collection[docID]["query_id"].ToString(),
+                                collection[docID]["query"].ToString());
                             i++;
                         }
                         docID++;
