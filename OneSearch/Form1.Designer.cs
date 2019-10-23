@@ -83,7 +83,7 @@
             this.jsonButton.Name = "jsonButton";
             this.jsonButton.Size = new System.Drawing.Size(115, 41);
             this.jsonButton.TabIndex = 0;
-            this.jsonButton.Text = "Upload";
+            this.jsonButton.Text = "Load";
             this.jsonButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.jsonButton.UseVisualStyleBackColor = false;
             this.jsonButton.Click += new System.EventHandler(this.button1_Click);
@@ -105,6 +105,7 @@
             this.buildIndex.Size = new System.Drawing.Size(143, 41);
             this.buildIndex.TabIndex = 1;
             this.buildIndex.Text = "Create Index";
+            this.buildIndex.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.buildIndex.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buildIndex.UseVisualStyleBackColor = false;
             this.buildIndex.Click += new System.EventHandler(this.button2_Click);
@@ -182,7 +183,7 @@
             this.ExitApp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ExitApp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ExitApp.Image = ((System.Drawing.Image)(resources.GetObject("ExitApp.Image")));
-            this.ExitApp.Location = new System.Drawing.Point(727, 731);
+            this.ExitApp.Location = new System.Drawing.Point(735, 731);
             this.ExitApp.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ExitApp.Name = "ExitApp";
             this.ExitApp.Size = new System.Drawing.Size(125, 41);

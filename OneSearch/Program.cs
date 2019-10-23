@@ -28,8 +28,8 @@ namespace OneSearch
             int counter = 0;
             foreach (var a in resultList)
             {
-                writer.WriteLine(resultList[counter]["qID"] + "\tQ0\t" + resultList[counter]["passID"] +
-                    "\t" + resultList[counter]["rank"] + "\t" + resultList[counter]["score"] + " \tBaselineSystem");
+                writer.WriteLine(resultList[counter]["qID"] + " \tQ0 \t" + resultList[counter]["passID"] +
+                    " \t" + resultList[counter]["rank"] + " \t" + resultList[counter]["score"] + " \tn10124853_n10065971_n10022481_n9649689_OneSearch");
                 counter++;
             }
             writer.Dispose();
