@@ -87,12 +87,13 @@ namespace OneSearch
                         {
                             string temp = collection[docID]["passages"][i]["url"].ToString();
                             string processedURL = Program.UrlPreprocessor(temp);
-                            
+
                             myLucene.IndexText(processedURL,
                                 collection[docID]["passages"][i]["passage_ID"].ToString(), 
                                 collection[docID]["passages"][i]["passage_text"].ToString(),
                                 collection[docID]["query_id"].ToString(),
-                                collection[docID]["query"].ToString());
+                                collection[docID]["query"].ToString(),
+                                collection[docID]["passages"][i]["url"].ToString());
                             i++;
                         }
                         docID++;
@@ -201,14 +202,14 @@ namespace OneSearch
         private void ExitApp_Click(object sender, EventArgs e)
         {
             //clean-up the index folder when exiting the app
-            if (indexPath != "")
-            {
-                DirectoryInfo di = new DirectoryInfo(indexPath);
-                foreach (FileInfo file in di.GetFiles())
-                {
-                    file.Delete();
-                }
-            }
+            //if (indexPath != "")
+            //{
+            //    DirectoryInfo di = new DirectoryInfo(indexPath);
+            //    foreach (FileInfo file in di.GetFiles())
+            //    {
+            //        file.Delete();
+            //    }
+            //}
             Application.Exit();
         }
 

@@ -77,6 +77,25 @@ namespace OneSearch
 
         public static string UrlPreprocessor(string input)
         {
+            string[] toremove = new string[] { "https", "http", "html", "com" };
+            foreach(var ccc in toremove)
+            {
+                input = input.Replace(ccc, string.Empty);
+            }
+            string[] templist = input.Split(':', '/', '.', '-', '_', '~');
+            string w2 = "";
+            int count = 0;
+            foreach (var tt in templist)
+            {
+                w2 = w2 + templist[count] + " ";
+                count++;
+            }
+            return w2;
+        }
+
+        public static string UrlPreprocessor2(string input)
+        {
+            
             string[] templist = input.Split(':', '/', '.', '-', '_', '~');
             string w2 = "";
             int count = 0;

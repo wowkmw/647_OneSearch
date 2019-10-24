@@ -38,12 +38,13 @@ namespace OneSearch
         private const string passText = "pText";
         private const string qID = "qID";
         private const string qText = "qTxt";
+        private const string pureURL = "pURL";
 
 
         public LuceneCore()
         {
             //the stopword is adapted from https://github.com/pyelasticsearch/pyelasticsearch
-            //with the addition of html, http and https
+
             string STOPWORDS = "a able about across after all almost also am among an and " +
                                 "any are as at be because been but by can cannot com could dear " +
                                 "did do does either else ever every for from get got had has " +
@@ -53,7 +54,7 @@ namespace OneSearch
                                 "rather said say says she should since so some than that the " +
                                 "their them then there these they this tis to too twas us " +
                                 "wants was we were what when where which while who whom why " +
-                                "will with would yet you your";
+                                "will with would www yet you your";
             string[] stopArray = STOPWORDS.Split();
             int myC = 0;
             HashSet<String> stopSet = new HashSet<String>();
@@ -94,7 +95,7 @@ namespace OneSearch
         /// Indexes a given string into the index
         /// </summary>
         /// <param name="text">The text to index</param>
-        public void IndexText(string url, string id, string passT, string queryID, string queryT)
+        public void IndexText(string url, string id, string passT, string queryID, string queryT, string pureUrl)
         {
             //using the url and query text from json for indexing
             Field field = new Field(uRL, url, Field.Store.YES, Field.Index.ANALYZED, Field.TermVector.NO);
@@ -104,6 +105,7 @@ namespace OneSearch
             Field idField = new Field(passID, id, Field.Store.YES, Field.Index.NO, Field.TermVector.NO);
             Field textField = new Field(passText, passT, Field.Store.YES, Field.Index.NO, Field.TermVector.NO);
             Field qIDField = new Field(qID, queryID, Field.Store.YES, Field.Index.NO, Field.TermVector.NO);
+            Field pURL = new Field(pureURL, pureUrl, Field.Store.YES, Field.Index.NO, Field.TermVector.NO);
             Document doc = new Document();
             
             doc.Add(field);
@@ -111,6 +113,7 @@ namespace OneSearch
             doc.Add(idField);
             doc.Add(textField);
             doc.Add(qIDField);
+            doc.Add(pURL);
             writer.AddDocument(doc);
         }
 
@@ -147,7 +150,7 @@ namespace OneSearch
             }
             else
             {
-                string temp = Program.UrlPreprocessor(querytext);
+                string temp = Program.UrlPreprocessor2(querytext);
                 string querytext2 = temp.ToLower();
                 query = MultiParser.Parse(querytext2);
             }
@@ -163,7 +166,7 @@ namespace OneSearch
                 Dictionary<string, string> dict;
                 dict = new Dictionary<string, string>();
                 Lucene.Net.Documents.Document doc = searcher.Doc(scoreDoc.Doc);
-                string urlValue = doc.Get(uRL).ToString();
+                string urlValue = doc.Get(pureURL).ToString();
                 string myPassID = doc.Get(passID).ToString();
                 string myPassText = doc.Get(passText).ToString();
                 string queryID = doc.Get(qID).ToString();
