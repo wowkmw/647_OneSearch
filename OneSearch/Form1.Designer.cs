@@ -283,6 +283,7 @@
             this.FinalWordBox.Name = "FinalWordBox";
             this.FinalWordBox.Size = new System.Drawing.Size(585, 32);
             this.FinalWordBox.TabIndex = 14;
+            this.FinalWordBox.TextChanged += new System.EventHandler(this.FinalWordBox_TextChanged);
             // 
             // TotalResultBox
             // 

@@ -45,7 +45,7 @@ namespace OneSearch
             //the stopword is adapted from https://github.com/pyelasticsearch/pyelasticsearch
             //with the addition of html, http and https
             string STOPWORDS = "a able about across after all almost also am among an and " +
-                                "any are as at be because been but by can cannot could dear " +
+                                "any are as at be because been but by can cannot com could dear " +
                                 "did do does either else ever every for from get got had has " +
                                 "have he her hers him his how however html http https i if in into is it its " +
                                 "just least let like likely may me might most must my " +
@@ -147,7 +147,16 @@ namespace OneSearch
             }
             else
             {
-                querytext = querytext.ToLower();
+                
+                string[] templist = querytext.Split(':', '/', '.');
+                string w2 = "";
+                int count = 0;
+                foreach (var tt in templist)
+                {
+                    w2 = w2 + templist[count] + " ";
+                    count++;
+                }
+                querytext = w2.ToLower();
                 query = MultiParser.Parse(querytext);
             }
             
