@@ -86,15 +86,9 @@ namespace OneSearch
                         foreach (var j in collection[docID]["passages"])
                         {
                             string temp = collection[docID]["passages"][i]["url"].ToString();
-                            string[] templist = temp.Split(':', '/', '.');
-                            string w2 = "";
-                            int count = 0;
-                            foreach (var tt in templist)
-                            {
-                                w2 = w2 + templist[count] + " ";
-                                count++;
-                            }
-                            myLucene.IndexText(w2,
+                            string processedURL = Program.UrlPreprocessor(temp);
+                            
+                            myLucene.IndexText(processedURL,
                                 collection[docID]["passages"][i]["passage_ID"].ToString(), 
                                 collection[docID]["passages"][i]["passage_text"].ToString(),
                                 collection[docID]["query_id"].ToString(),

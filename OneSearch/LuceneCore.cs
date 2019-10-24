@@ -96,11 +96,11 @@ namespace OneSearch
         /// <param name="text">The text to index</param>
         public void IndexText(string url, string id, string passT, string queryID, string queryT)
         {
-            //using only the url for indexing
+            //using the url and query text from json for indexing
             Field field = new Field(uRL, url, Field.Store.YES, Field.Index.ANALYZED, Field.TermVector.NO);
             Field qTfield = new Field(qText, queryT, Field.Store.YES, Field.Index.ANALYZED, Field.TermVector.NO);
-            qTfield.Boost = 10; //boost the query index
-            //using the url and query text for indexing
+            qTfield.Boost = 5; //boost the query index
+
             Field idField = new Field(passID, id, Field.Store.YES, Field.Index.NO, Field.TermVector.NO);
             Field textField = new Field(passText, passT, Field.Store.YES, Field.Index.NO, Field.TermVector.NO);
             Field qIDField = new Field(qID, queryID, Field.Store.YES, Field.Index.NO, Field.TermVector.NO);
@@ -147,17 +147,9 @@ namespace OneSearch
             }
             else
             {
-                
-                string[] templist = querytext.Split(':', '/', '.');
-                string w2 = "";
-                int count = 0;
-                foreach (var tt in templist)
-                {
-                    w2 = w2 + templist[count] + " ";
-                    count++;
-                }
-                querytext = w2.ToLower();
-                query = MultiParser.Parse(querytext);
+                string temp = Program.UrlPreprocessor(querytext);
+                string querytext2 = temp.ToLower();
+                query = MultiParser.Parse(querytext2);
             }
             
             List<Dictionary<string, string>> resultList = new List<Dictionary<string, string>>();

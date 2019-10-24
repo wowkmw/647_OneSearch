@@ -257,7 +257,7 @@
             this.FinalWord.BackColor = System.Drawing.Color.Transparent;
             this.FinalWord.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FinalWord.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.FinalWord.Location = new System.Drawing.Point(64, 54);
+            this.FinalWord.Location = new System.Drawing.Point(64, 44);
             this.FinalWord.Name = "FinalWord";
             this.FinalWord.Size = new System.Drawing.Size(196, 17);
             this.FinalWord.TabIndex = 12;
@@ -277,11 +277,12 @@
             // 
             // FinalWordBox
             // 
-            this.FinalWordBox.Location = new System.Drawing.Point(275, 51);
+            this.FinalWordBox.Location = new System.Drawing.Point(275, 23);
             this.FinalWordBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.FinalWordBox.Multiline = true;
             this.FinalWordBox.Name = "FinalWordBox";
-            this.FinalWordBox.Size = new System.Drawing.Size(585, 32);
+            this.FinalWordBox.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
+            this.FinalWordBox.Size = new System.Drawing.Size(585, 60);
             this.FinalWordBox.TabIndex = 14;
             this.FinalWordBox.TextChanged += new System.EventHandler(this.FinalWordBox_TextChanged);
             // 
@@ -291,7 +292,7 @@
             this.TotalResultBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.TotalResultBox.Multiline = true;
             this.TotalResultBox.Name = "TotalResultBox";
-            this.TotalResultBox.Size = new System.Drawing.Size(100, 24);
+            this.TotalResultBox.Size = new System.Drawing.Size(106, 24);
             this.TotalResultBox.TabIndex = 15;
             // 
             // AsIsBox
