@@ -28,7 +28,7 @@ namespace OneSearch
             int counter = 0;
             foreach (var a in resultList)
             {
-                writer.WriteLine(resultList[counter]["qID"] + " \tQ0 \t" + resultList[counter]["passID"] +
+                writer.WriteLine(resultList[counter]["qID"] + " \tQ"+ queryCout+ "\t" + resultList[counter]["passID"] +
                     " \t" + resultList[counter]["rank"] + " \t" + resultList[counter]["score"] + " \tn10124853_n10065971_n10022481_n9649689_OneSearch");
                 counter++;
             }
@@ -77,7 +77,7 @@ namespace OneSearch
 
         public static string UrlPreprocessor(string input)
         {
-            string[] toremove = new string[] { "https", "http", "html", "com" };
+            string[] toremove = new string[] { "https", "http", "html", "com", "www", "php" };
             foreach(var ccc in toremove)
             {
                 input = input.Replace(ccc, string.Empty);
