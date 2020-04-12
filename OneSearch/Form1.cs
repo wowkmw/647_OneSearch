@@ -273,5 +273,15 @@ namespace OneSearch
         {
 
         }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This project was part of the IFN643 coursework.","About",
+            MessageBoxButtons.OK,
+            MessageBoxIcon.Information,
+            MessageBoxDefaultButton.Button1,
+            0, "https://github.com/wowkmw/647_OneSearch",
+            "");
+        }
     }
 }
